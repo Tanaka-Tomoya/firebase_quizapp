@@ -5,3 +5,238 @@ service firebase.storage {
     }
   }
 }
+
+
+import React, { Component } from 'react';
+import MobileStepper from '@material-ui/core/MobileStepper';
+import styled from 'styled-components';
+import Typography from '@material-ui/core/Typography'
+import { MuiThemeProvider, withStyles } from '@material-ui/core/styles';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import CheckCircleOutline from '@material-ui/icons/CheckCircleOutline'
+import ArrowForward from '@material-ui/icons/ArrowForward'
+import Button from '@material-ui/core/Button';
+import RadioButtonUnchecked from '@material-ui/icons/RadioButtonUnchecked'
+import RadioButtonChecked from '@material-ui/icons/RadioButtonChecked'
+import {theme} from '../../ults/theme.js'
+import Modal from '@material-ui/core/Modal';
+import { Link } from 'react-router-dom'
+
+
+function getSteps() {
+  return ['#1', '#2','#3'];
+}
+
+const SubmitButton = withStyles({
+  root: {
+    background: `${theme.palette.secondary.main}`,
+    color: 'white',
+    width: '200px',
+    height: '50px',
+  },
+})(Button)
+
+const Stepper = withStyles({
+  root: {
+
+  },
+  dot: {
+    height: '20px',
+    width: '20px'
+  }
+
+})(MobileStepper);
+
+function getStepContent(step) {
+  switch (step) {
+    case 0:
+      return 'Select campaign settings...';
+    case 1:
+      return 'What is an ad group anyways?';
+    case 2:
+      return 'This is the bit I really care about!';
+    default:
+      return 'Unknown step';
+  }
+}
+
+function getModalStyle() {
+  const top = 50
+  const left = 50
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+  };
+}
+
+
+export default class question extends Component {
+
+	state = {
+		open: false,
+    selectedValue: 'A',
+    activeStep: 1
+	}
+
+  handleChange = event => {
+  this.setState({ selectedValue: event.target.value });
+  };
+
+	handleOpen = () => {
+	  this.setState({ open: true });
+	};
+
+  handleClose = () => {
+	  this.setState({ open: false });
+  };
+
+	ComponentWillMount() {
+	}
+	render() {
+    const { classes, theme } = this.props
+		const steps = getSteps();
+		return (
+		<Container theme={theme} >
+
+  		<Modal
+  			aria-labelledby="simple-modal-title"
+  			aria-describedby="simple-modal-description"
+  			open={this.state.open}
+  			onClose={this.handleClose}
+  		>
+
+  			<ModalDiv style={getModalStyle()}>
+  				<Circle style={{ fontSize: '350px'}}></Circle>
+  				<Typography variant="h2">正解です！</Typography>
+  				<Typography variant="h3">この調子でがんばりましょう！</Typography>
+  				<Link to='/result'>
+  					<Forward style={{ fontSize: '100px',textAlign: 'center'}}></Forward>
+  				</Link>
+  			</ModalDiv>
+  		</Modal>
+
+			<QuestionContainer>
+        <Stepper
+          variant="dots"
+          steps={6}
+          position="static"
+          activeStep={this.state.activeStep}
+        />
+
+  			<QuestionTitle  variant="h2">Q.TestTest</QuestionTitle>
+
+  			<FormContainer style={{marginTop: '80px'}}>
+  				<RadioContainer>
+            <FormControlLabel
+              label={<span style={{ fontSize: '30px' }}>A</span>}
+              control={<Radio
+                       checked={this.state.selectedValue === 'A'}
+                       onChange={this.handleChange}
+        						   value="A"
+        						   control={<RadioButton color="primary" style={{fontSize: '30px'}} />}
+                       icon={<RadioButtonUnchecked color="primary" style={{ fontSize: '50px' }} />}
+                       checkedIcon={<RadioButtonChecked style={{ fontSize: '50px'}} />}
+        						/>}
+              />
+            <FormControlLabel
+              label={<span style={{ fontSize: '30px' }}>B</span>}
+              control={<Radio
+                       checked={this.state.selectedValue === 'B'}
+                       onChange={this.handleChange}
+        						   value="B"
+        						   control={<RadioButton color="primary" style={{fontSize: '30px'}} />}
+                       icon={<RadioButtonUnchecked color="primary" style={{ fontSize: '50px' }} />}
+                       checkedIcon={<RadioButtonChecked style={{ fontSize: '50px'}} />}
+        						/>}
+              />
+            <FormControlLabel
+              label={<span style={{ fontSize: '30px' }}>C</span>}
+              control={<Radio
+                       checked={this.state.selectedValue === 'C'}
+                       onChange={this.handleChange}
+        						   value="C"
+        						   control={<RadioButton color="primary" style={{fontSize: '30px'}} />}
+                       icon={<RadioButtonUnchecked color="primary" style={{ fontSize: '50px' }} />}
+                       checkedIcon={<RadioButtonChecked style={{ fontSize: '50px'}} />}
+        						/>}
+              />
+              <FormControlLabel
+                label={<span style={{ fontSize: '30px' }}>D</span>}
+                control={<Radio
+                         checked={this.state.selectedValue === 'D'}
+                         onChange={this.handleChange}
+          						   value="D"
+          						   control={<RadioButton color="primary" style={{fontSize: '30px'}} />}
+                         icon={<RadioButtonUnchecked  color="primary" style={{ fontSize: '50px' }} />}
+                         checkedIcon={<RadioButtonChecked style={{ fontSize: '50px'}} />}
+          						/>}
+                />
+  				</RadioContainer>
+  				<SubmitButton color="secondary" variant="contained" onClick={this.handleOpen}><span style={{fontSize: '25px'}}>答える！！</span></SubmitButton>
+  			</FormContainer>
+      </QuestionContainer>
+		</Container>
+		)
+	}
+}
+
+const QuestionContainer = styled.div`
+	margin-top: 80px;
+	display: block;
+	width: 100%;
+	height: 100px;
+`
+
+const Container = styled(MuiThemeProvider)`
+	width: 80%;
+	margin: 0 auto;
+`
+
+const QuestionTitle = styled(Typography) `
+	padding-left: 25px;
+	color: black;
+`
+const FormContainer = styled(FormControl) `
+	width: 880px;
+	height: 500px;
+`
+const RadioContainer = styled(RadioGroup) `
+	width: 70%;
+	height: 100%;
+	margin-left: 25px;
+`
+const FormLabel = styled(FormControlLabel) `
+`
+const RadioButton = styled(Radio) `
+
+`
+
+const ModalDiv = styled.div `
+	text-align: center;
+	position: absolute;
+	width: 75%;
+	height: 75%;
+	background: white;
+`
+
+const Circle = styled(CheckCircleOutline)`
+	text-align: center;
+	color: #FFA000;
+  font-size: 350px;
+`
+
+const Forward = styled(ArrowForward)`
+	color: #00B8D4;
+	margin-top: 200px;
+`
+
+
+const SubmitButtonWord = styled.p `
+  font-size: 50px;
+  color: white;
+`

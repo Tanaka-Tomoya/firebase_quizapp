@@ -7,13 +7,13 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 //import MenuIcon from '@material-ui/icons/Menu';
-import {theme} from '../../ults/theme.js'
+import {theme} from '../../ults/theme'
 
 
-export default class Bar extends Component {
+export default class MenuBar extends Component {
 	render() {
 		return (
-			<Div theme={theme} class="Div">
+			<Div theme={theme}>
 				<AppBar color="primary">
 					<Toolbar>
 						<IconButton color="inherit" aria-label="Menu">

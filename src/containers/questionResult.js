@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { questions_list } from '../components/questions_list/questions_list'
+import { questionResult } from '../components/questionResult/questionResult'
 
 function mapStateToProps(state) {
 	return state;
@@ -12,4 +12,4 @@ function mapDispatchToProp(dispatch) {
 export default connect(
 	mapStateToProps,
 	mapDispatchToProp
-)(questions_list)
+)(questionResult)

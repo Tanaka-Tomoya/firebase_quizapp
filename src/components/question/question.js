@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
+import MobileStepper from '@material-ui/core/MobileStepper';
 import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography'
 import { MuiThemeProvider, withStyles } from '@material-ui/core/styles';
@@ -12,36 +10,119 @@ import FormControl from '@material-ui/core/FormControl';
 import CheckCircleOutline from '@material-ui/icons/CheckCircleOutline'
 import ArrowForward from '@material-ui/icons/ArrowForward'
 import Button from '@material-ui/core/Button';
-import Share from '@material-ui/icons/Share'
+import RadioButtonUnchecked from '@material-ui/icons/RadioButtonUnchecked'
+import RadioButtonChecked from '@material-ui/icons/RadioButtonChecked'
 import {theme} from '../../ults/theme.js'
 import Modal from '@material-ui/core/Modal';
 import { Link } from 'react-router-dom'
+import { MainTypography } from '../../ults/theme';
 
 
-function getSteps() {
-  return ['#1', '#2','#3'];
-}
+
+const Container = withStyles({
+  root: {
+    width: '80%',
+    margin: '0 auto'
+  }
+})(MuiThemeProvider)
 
 const SubmitButton = withStyles({
   root: {
-    background: `${theme.palette.primary.main}`,
-    color: 'white'
+    background: `${theme.palette.secondary.main}`,
+    fontSize: '30px',
+    color: 'white',
+    width: '190px',
+    height: '50px',
+    marginLeft: 'auto',
+    marginRight: '100px'
   }
 
 })(Button)
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return 'Select campaign settings...';
-    case 1:
-      return 'What is an ad group anyways?';
-    case 2:
-      return 'This is the bit I really care about!';
-    default:
-      return 'Unknown step';
+
+const QuestionTypography = withStyles({
+  root: {
+    height: 'auto',
+    marginLeft: '250px',
+    marginBottom: '120px',
+    color: 'rgba(0,0,0,0.87)'
+  },
+  h2: {
+
   }
-}
+})(Typography)
+
+const RadioButton = withStyles({
+  root: {
+    fontSize: '30px'
+  }
+})(Radio)
+
+const ModalTypography = withStyles({
+  root: {
+
+  }
+})(MainTypography)
+
+const UncheckedButton = withStyles({
+  root: {
+    fontSize: '50px'
+  }
+})(RadioButtonUnchecked)
+
+const CheckedButton = withStyles({
+  root: {
+    fontSize: '50px'
+  }
+})(RadioButtonChecked)
+
+const RadioContainer = withStyles({
+  root: {
+    	width: '70%',
+    	height: '100%',
+    	marginLeft: '25px',
+  }
+
+})(RadioGroup)
+
+const FormContainer = withStyles({
+  root: {
+    width: '80%',
+    marginLeft: '225px',
+    marginTop: '30px'
+  }
+})(FormControl)
+
+const Stepper = withStyles({
+  root: {
+    background: 'white',
+    width: '100px',
+    height: '50px',
+    margin: '0 auto'
+  },
+  dot: {
+    height: '12px',
+    width: '12px'
+  }
+
+})(MobileStepper);
+
+const Forward = withStyles({
+  root: {
+    color: '#00B8D4',
+    marginTop: '200px',
+    fontSize: '100px',
+    textAlign: 'center'
+  }
+})(ArrowForward)
+
+const Circle = withStyles({
+  root: {
+    textAlign: 'center',
+    color: '#FFA000',
+    fontSize: '350px'
+  }
+})(CheckCircleOutline)
 
 function getModalStyle() {
   const top = 50
@@ -59,7 +140,13 @@ export default class question extends Component {
 
 	state = {
 		open: false,
+    selectedValue: 'A',
+    activeStep: 1
 	}
+
+  handleChange = event => {
+  this.setState({ selectedValue: event.target.value });
+  };
 
 	handleOpen = () => {
 	  this.setState({ open: true });
@@ -73,67 +160,87 @@ export default class question extends Component {
 	}
 	render() {
     console.log(SubmitButton.root)
-    console.log(theme.palette.primary.main)
-		const steps = getSteps();
+    console.log(theme.palette.secondary.main)
 		return (
 		<Container theme={theme} >
 
-		<Modal
-			aria-labelledby="simple-modal-title"
-			aria-describedby="simple-modal-description"
-			open={this.state.open}
-			onClose={this.handleClose}
-		>
-			<ModalDiv style={getModalStyle()}>
-				<Circle style={{ fontSize: '350px',textAlign: 'center'}}></Circle>
-				<Typography variant="display2">正解です！</Typography>
-				<Typography variant="display1">この調子でがんばりましょう！</Typography>
-				<Link to='/result'>
-					<Forward style={{ fontSize: '100px',textAlign: 'center'}}></Forward>
-				</Link>
+  		<Modal
+  			aria-labelledby="simple-modal-title"
+  			aria-describedby="simple-modal-description"
+  			open={this.state.open}
+  			onClose={this.handleClose}
+  		>
 
-			</ModalDiv>
-		</Modal>
+  			<ModalDiv style={getModalStyle()}>
+  				<Circle></Circle>
+  				<Typography variant="h2">正解です！</Typography>
+  				<Typography variant="display1" gutterBottom>この調子でがんばりましょう！</Typography>
+  				<Link to='/result'>
+  					<Forward/>
+  				</Link>
+  			</ModalDiv>
+  		</Modal>
 
-			<QuestionContainer class="QuestionContainer">
-				<Stepper activeStep='0'>
-						{steps.map((label, index) => {
-							return (
-								<Step key="1">
-									<StepLabel>a</StepLabel>
-								</Step>
-							);
-						})}
-				</Stepper>
-			</QuestionContainer>
-			<QuestionTitle  variant="display2">Q.TestTest</QuestionTitle>
-			<FormContainer style={{marginTop: '80px'}}>
-				<RadioContainer>
-					<FormLabel
-						value="A"
-						control={<RadioButton color="primary" style={{fontSize: '30px'}}/>}
-						label={<span style={{ fontSize: '30px' }}>A</span>}
-						icon={<Share style={{ fontSize: 50 }} />}
+			<QuestionContainer>
+        <Stepper
+          variant="dots"
+          steps={6}
+          position="static"
+          activeStep={this.state.activeStep}
+        />
 
-						/>
-					<FormLabel
-            value="B"
-            control={<RadioButton color="primary" />}
-            label={<span style={{fontSize: '30px'}}>B</span>}
-          />
-					<FormLabel
-            value="C"
-            control={<RadioButton color="primary" />}
-            label={<span style={{fontSize: '30px'}}>C</span>}
-          />
-					<FormLabel
-            value="D"
-            control={<RadioButton color="primary" />}
-            label={<span style={{fontSize: '30px'}}>D</span>}
-          />
-				</RadioContainer>
-				<SubmitButton color="secondary" variant="contained" onClick={this.handleOpen}>答える！！</SubmitButton>
-			</FormContainer>
+  			<QuestionTypography variant="h2">Q.TestTest</QuestionTypography>
+
+  			<FormContainer>
+  				<RadioContainer>
+            <FormControlLabel
+              label={<RadioButtonValue>A</RadioButtonValue>}
+              control={<Radio
+                       checked={this.state.selectedValue === 'A'}
+                       onChange={this.handleChange}
+        						   value="A"
+        						   control={<RadioButton color="primary" />}
+                       icon={<UncheckedButton color="primary"  />}
+                       checkedIcon={<CheckedButton />}
+        						/>}
+              />
+            <FormControlLabel
+              label={<RadioButtonValue>B</RadioButtonValue>}
+              control={<Radio
+                       checked={this.state.selectedValue === 'B'}
+                       onChange={this.handleChange}
+        						   value="B"
+        						   control={<RadioButton color="primary" />}
+                       icon={<UncheckedButton color="primary" />}
+                       checkedIcon={<CheckedButton />}
+        						/>}
+              />
+            <FormControlLabel
+              label={<RadioButtonValue>C</RadioButtonValue>}
+              control={<Radio
+                       checked={this.state.selectedValue === 'C'}
+                       onChange={this.handleChange}
+        						   value="C"
+        						   control={<RadioButton color="primary" />}
+                       icon={<UncheckedButton color="primary"  />}
+                       checkedIcon={<CheckedButton />}
+        						/>}
+              />
+              <FormControlLabel
+                label={<RadioButtonValue>D</RadioButtonValue>}
+                control={<Radio
+                         checked={this.state.selectedValue === 'D'}
+                         onChange={this.handleChange}
+          						   value="D"
+          						   control={<RadioButton color="primary" />}
+                         icon={<UncheckedButton  color="primary" />}
+                         checkedIcon={<CheckedButton />}
+          						/>}
+                />
+  				</RadioContainer>
+  				<SubmitButton color="secondary" variant="contained" onClick={this.handleOpen}><span>答える！</span></SubmitButton>
+  			</FormContainer>
+    	</QuestionContainer>
 		</Container>
 		)
 	}
@@ -143,31 +250,11 @@ const QuestionContainer = styled.div`
 	margin-top: 80px;
 	display: block;
 	width: 100%;
-	height: 100px;
+	height: 1000px;
 `
 
-const Container = styled(MuiThemeProvider)`
-	width: 80%;
-	margin: 0 auto;
-`
-
-const QuestionTitle = styled(Typography) `
-	padding-left: 25px;
-	color: black;
-`
-const FormContainer = styled(FormControl) `
-	width: 880px;
-	height: 500px;
-`
-const RadioContainer = styled(RadioGroup) `
-	width: 70%;
-	height: 100%;
-	margin-left: 25px;
-`
-const FormLabel = styled(FormControlLabel) `
-`
-const RadioButton = styled(Radio) `
-
+const RadioButtonValue = styled.span `
+  font-size: 30px;
 `
 
 const ModalDiv = styled.div `
@@ -178,18 +265,7 @@ const ModalDiv = styled.div `
 	background: white;
 `
 
-const Circle = styled(CheckCircleOutline)`
-	text-align: center;
-	color: #FFA000;
-`
-
-const Forward = styled(ArrowForward)`
-	color: #00B8D4;
-	margin-top: 200px;
-`
-
-
 const SubmitButtonWord = styled.p `
-  font-size: 30px;
+  font-size: 50px;
   color: white;
 `

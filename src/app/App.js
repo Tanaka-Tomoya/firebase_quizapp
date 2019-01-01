@@ -4,9 +4,10 @@ import { Provider } from 'react-redux';
 import styled from 'styled-components'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import configureStore from '../store';
-import Result from '../components/questions_list/questions_list'
+import Result from '../components/questionResult/questionResult'
+import List from '../components/questionsList/questionsList'
 import Question from '../components/question/question'
-import Bar from '../components/general/appbar'
+import MenuBar from '../components/general/appbar'
 import config from './firebase_config';
 
 let store = configureStore();
@@ -22,21 +23,19 @@ export default class App extends Component {
   }
 
   render() {
-    console.log(this.state)
     return (
-      <MuiThemeProvider>
-        <Provider store={store}>
+        <Root store={store}>
           <BrowserRouter>
             <AppDiv>
-              <AppBar/>
+              <MenuBar/>
               <Switch>
                 <Route path='/question' render={() => <Question/>}  />
                 <Route path='/result' render={() => <Result/> }  />
+                <Route path='/list' render={() => <List/ > } />
               </Switch>
             </AppDiv>
           </BrowserRouter>
-        </Provider>
-      </MuiThemeProvider>
+        </Root>
     );
   }
 }
@@ -45,8 +44,7 @@ const AppDiv = styled.div`
   width: 100%;
   height: 500px;
 `
-
-const AppBar = styled(Bar)`
-  width:100%
-  height: 50px;
+const Root = styled(Provider) `
+  width: 100%;
+  height: 1000px;
 `
