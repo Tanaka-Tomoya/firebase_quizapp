@@ -42,7 +42,7 @@ export default class App extends Component {
 
 const AppDiv = styled.div`
   width: 100%;
-  height: 500px;
+  height: 1000px;
 `
 const Root = styled(Provider) `
   width: 100%;

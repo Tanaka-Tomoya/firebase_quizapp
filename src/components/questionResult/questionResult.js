@@ -76,7 +76,7 @@ export default class questionResult extends Component {
         		</ExpansionPanelDetails>
       		</Panel>
 					<QuitButtonArea>
-						<QuitButton><QuitLink to="/">戻る</QuitLink></QuitButton>
+						<QuitButton variant="contained"><QuitLink to="/">戻る</QuitLink></QuitButton>
 					</QuitButtonArea>
 				</ResultDetail>
 			</ResultContainer>
