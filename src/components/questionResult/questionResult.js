@@ -96,6 +96,7 @@ const InCorrect = withStyles({
 	}
 
 })(Check)
+
 const SubTypography = withStyles({
 	root: {
 		marginTop: '30px'

@@ -3,14 +3,29 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { Provider } from 'react-redux';
 import styled from 'styled-components'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import configureStore from '../store';
 import Result from '../components/questionResult/questionResult'
-import List from '../components/questionsList/questionsList'
+import QuestionsList from '../containers/questionsList'
 import Question from '../components/question/question'
+import Home from '../components/home/home'
 import MenuBar from '../components/general/appbar'
-import config from './firebase_config';
+import Welcome from '../components/welcome/welcome'
+import { compose } from 'redux';
+import { reactReduxFirebase } from 'react-redux-firebase'
+import firebase from 'firebase'
+import rootReducer from '../reducers/index'
+import firebaseConfig from '../firebase/config'
+import configureStore from '../store/index'
 
-let store = configureStore();
+firebase.initializeApp(firebaseConfig);  // #2
+
+
+const createStoreWithFirebase = compose(  // #3
+  reactReduxFirebase(firebase, {})
+)(configureStore);
+
+
+
+const store = createStoreWithFirebase(rootReducer);
 
 
 
@@ -29,9 +44,11 @@ export default class App extends Component {
             <AppDiv>
               <MenuBar/>
               <Switch>
-                <Route path='/question' render={() => <Question/>}  />
-                <Route path='/result' render={() => <Result/> }  />
-                <Route path='/list' render={() => <List/ > } />
+                <Route exact path='/' render={() => <Home />} />
+                <Route exact path='/welcome' render={() => <Welcome />} />
+                <Route exact path='/question' render={() => <Question/>}  />
+                <Route exact path='/result' render={() => <Result/> }  />
+                <Route exact path='/list' render={() => <QuestionsList/ > } />
               </Switch>
             </AppDiv>
           </BrowserRouter>

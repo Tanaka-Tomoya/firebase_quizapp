@@ -74,7 +74,6 @@ export default class questionsList extends Component {
   };
 
 	componentWillMount(){
-		this.setState({ open: false });
 		console.log(this.state)
 	};
 
@@ -92,10 +91,12 @@ export default class questionsList extends Component {
          <SearchResult>
             <List>
               { items.map(item => {
+                console.log(process.env.PUBLIC_URL + item.img)
                 return(
                 <ListItemContents alignItems="flex-start" key={item.id}>
                   <ListItemAvatar>
-                    <Avatar alt="Remy Sharp" src={ process.env.PUBLIC_URL + item.img } />
+                    <Avatar alt="Test" src={ process.env.PUBLIC_URL + item.img }
+                     />
                   </ListItemAvatar>
                   <ListItemText
                     primary=
@@ -286,6 +287,11 @@ const SearchResult = styled.div `
   background: white;
   margin: 0 auto;
   margin-top: 30px;
+`
+
+const Img = styled.img `
+  width: 10px;
+  height: 10px;
 `
 
 //background-image: url("/static/media/react.876a8325.svg");

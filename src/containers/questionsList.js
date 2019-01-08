@@ -1,15 +1,27 @@
 import { connect } from 'react-redux'
-import { questionsList } from '../components/questionsList/questionsList'
+import { compose } from 'redux'
+import { firebaseConnect } from 'react-redux-firebase'
+import questionsList from '../components/questionsList/questionsList'
+import { getQuestionsItem } from '../actions/questionsList'
 
 function mapStateToProps(state) {
-	return state;
+	return {
+		questions: getQuestionsItem(state.firebase.data.questions)
+	}
 }
 
-function mapDispatchToProp(dispatch) {
+function mapDispatchToProps(dispatch) {
 	return dispatch;
 }
 
-export default connect(
-	mapStateToProps,
-	mapDispatchToProp
+const firebaseQueries = ['questions'];
+
+const QuestionsList = compose(
+	firebaseConnect(firebaseQueries),
+	connect(
+		mapStateToProps,
+    mapDispatchToProps
+	)
 )(questionsList)
+
+export default QuestionsList
