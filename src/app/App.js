@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { Provider } from 'react-redux';
 import styled from 'styled-components'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
@@ -10,23 +9,29 @@ import Home from '../components/home/home'
 import MenuBar from '../components/general/appbar'
 import Welcome from '../components/welcome/welcome'
 import { compose } from 'redux';
-import { reactReduxFirebase } from 'react-redux-firebase'
+import { reactReduxFirebase, getFirebase } from 'react-redux-firebase'
 import firebase from 'firebase'
 import rootReducer from '../reducers/index'
 import firebaseConfig from '../firebase/config'
-import configureStore from '../store/index'
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import { createLogger } from 'redux-logger';
 
+const loggerMiddleware = createLogger();
 firebase.initializeApp(firebaseConfig);  // #2
 
 
-const createStoreWithFirebase = compose(  // #3
+const createStoreWithFirebase = compose(
+  applyMiddleware(
+    thunk.withExtraArgument({getFirebase}),
+    loggerMiddleware
+  ),
   reactReduxFirebase(firebase, {})
-)(configureStore);
+)(createStore);
 
 
 
 const store = createStoreWithFirebase(rootReducer);
-
 
 
 export default class App extends Component {
@@ -39,7 +44,7 @@ export default class App extends Component {
 
   render() {
     return (
-        <Root store={store}>
+        <Provider store={store}>
           <BrowserRouter>
             <AppDiv>
               <MenuBar/>
@@ -48,20 +53,16 @@ export default class App extends Component {
                 <Route exact path='/welcome' render={() => <Welcome />} />
                 <Route exact path='/question' render={() => <Question/>}  />
                 <Route exact path='/result' render={() => <Result/> }  />
-                <Route exact path='/list' render={() => <QuestionsList/ > } />
+                <Route exact path='/list' render={() => <QuestionsList/> } />
               </Switch>
             </AppDiv>
           </BrowserRouter>
-        </Root>
+        </Provider>
     );
   }
 }
 
 const AppDiv = styled.div`
-  width: 100%;
-  height: 1000px;
-`
-const Root = styled(Provider) `
   width: 100%;
   height: 1000px;
 `

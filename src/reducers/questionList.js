@@ -1,4 +1,4 @@
-import { GET_QUESTIONS_ITEM } from '../actions/questionList'
+import { GET_QUESTIONS_ITEM } from '../actions/questionsList'
 
 const initialState = {
 	questions: [
@@ -6,7 +6,7 @@ const initialState = {
 	]
 }
 
-export default function getQuestionListItem(state = initialState, action) {
+function questionList(state = initialState, action) {
 	switch(action.type) {
 		case GET_QUESTIONS_ITEM:
       return Object.assign({}, state, {
@@ -16,3 +16,5 @@ export default function getQuestionListItem(state = initialState, action) {
 			return state;
 	}
 }
+
+export default questionList

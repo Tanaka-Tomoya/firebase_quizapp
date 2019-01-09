@@ -6,12 +6,12 @@ import { getQuestionsItem } from '../actions/questionsList'
 
 function mapStateToProps(state) {
 	return {
-		questions: getQuestionsItem(state.firebase.data.questions)
+		questions: getQuestionsItem(state.firebase.data)
 	}
 }
 
 function mapDispatchToProps(dispatch) {
-	return dispatch;
+	return {dispatch}
 }
 
 const firebaseQueries = ['questions'];
@@ -21,7 +21,6 @@ const QuestionsList = compose(
 	connect(
 		mapStateToProps,
     mapDispatchToProps
-	)
-)(questionsList)
+	))(questionsList)
 
-export default QuestionsList
+export default QuestionsList;

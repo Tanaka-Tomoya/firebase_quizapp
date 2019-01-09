@@ -101,13 +101,13 @@ export default class questionsList extends Component {
                   <ListItemText
                     primary=
                      <Link to="/question">
-                      <Typography component="span" color="textPrimary">
+                      <Typography component={'span'} color="textPrimary">
                         {item.title}
                       </Typography>
                      </Link>
                     secondary={
                       <React.Fragment>
-                        <Typography component="span" color="textPrimary">
+                        <Typography component={'span'} color="textPrimary">
                           {item.user + item.id}
                         </Typography>
                         <Chip label={ item.tag }/>
@@ -267,12 +267,6 @@ const ListItemContents = withStyles({
   }
 })(ListItem)
 
-
-const CheckFieldValue = styled.span `
-	display: block;
-	margin-top: auto;
-
-`
 const ModalContainer = styled.div `
 	text-align: center;
 	position: absolute;
@@ -289,10 +283,6 @@ const SearchResult = styled.div `
   margin-top: 30px;
 `
 
-const Img = styled.img `
-  width: 10px;
-  height: 10px;
-`
 
 //background-image: url("/static/media/react.876a8325.svg");
 //image="/static/images/cards/contemplative-reptile.jpg"
