@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import styled from 'styled-components'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Result from '../components/questionResult/questionResult'
-import QuestionsList from '../containers/questionsList'
+import List from '../containers/List'
 import Question from '../components/question/question'
 import Home from '../components/home/home'
 import MenuBar from '../components/general/appbar'
@@ -29,8 +29,6 @@ const createStoreWithFirebase = compose(
   reactReduxFirebase(firebase, {})
 )(createStore);
 
-
-
 const store = createStoreWithFirebase(rootReducer);
 
 
@@ -53,7 +51,7 @@ export default class App extends Component {
                 <Route exact path='/welcome' render={() => <Welcome />} />
                 <Route exact path='/question' render={() => <Question/>}  />
                 <Route exact path='/result' render={() => <Result/> }  />
-                <Route exact path='/list' render={() => <QuestionsList/> } />
+                <Route exact path='/list' render={() => <List/> } />
               </Switch>
             </AppDiv>
           </BrowserRouter>

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import Modal from '@material-ui/core/Modal';
 import Typography from '@material-ui/core/Typography';
-import { Link } from 'react-router-dom'
 import { MuiThemeProvider, withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -10,16 +9,13 @@ import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
 import TextField from '@material-ui/core/TextField';
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
-import Chip from '@material-ui/core/Chip';
-import Star from '@material-ui/icons/StarRate'
 import { theme } from '../../ults/theme'
+import { isLoaded, isEmpty } from 'react-redux-firebase'
+import ListContent from './ListContent.js'
+import { firebaseConnect } from 'react-redux-firebase'
 
 function getModalStyle() {
   const top = 50 ;
@@ -59,8 +55,7 @@ const items = [
 ]
 
 
-
-export default class questionsList extends Component {
+class List extends Component {
 	state = {
     open: false,
   };
@@ -74,13 +69,25 @@ export default class questionsList extends Component {
   };
 
 	componentWillMount(){
-		console.log(this.state)
 	};
 
 	render() {
-		console.log(process.env.PUBLIC_URL)
+    const { firebase } = this.props
+    const hoge = firebase.database().ref('questions')
+    console.log(hoge)
+    hoge.on('value', function(snapshot) {
+      console.log(snapshot.val())
+    });
+    const { questions } = this.props
+    if (!isLoaded(questions)) {
+      return <div>読み込み中</div>
+    }
+    if (isEmpty(questions)) {
+      return <div>中身がありません</div>
+    }
+
 		return (
-			<Container theme={theme}>
+			<Container>
         <ListContainer>
           <SearchField
              id="outlined-search"
@@ -88,40 +95,11 @@ export default class questionsList extends Component {
              type="search"
              variant="outlined"
            />
-         <SearchResult>
+          <SearchResult>
             <List>
-              { items.map(item => {
-                console.log(process.env.PUBLIC_URL + item.img)
-                return(
-                <ListItemContents alignItems="flex-start" key={item.id}>
-                  <ListItemAvatar>
-                    <Avatar alt="Test" src={ process.env.PUBLIC_URL + item.img }
-                     />
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary=
-                     <Link to="/question">
-                      <Typography component={'span'} color="textPrimary">
-                        {item.title}
-                      </Typography>
-                     </Link>
-                    secondary={
-                      <React.Fragment>
-                        <Typography component={'span'} color="textPrimary">
-                          {item.user + item.id}
-                        </Typography>
-                        <Chip label={ item.tag }/>
-                        <Tag label={ item.tag }/>
-                        <Tag
-                          label={ item.level}
-                          icon=<Star/>
-                        />
-                      </React.Fragment>
-                    }
-                  />
-                </ListItemContents>
-                )
-              })}
+              {Object.keys(questions).map((key) => (
+                <ListContent key={key} {...questions[key]} hoge="hoge"/>
+              ))}
             </List>
          </SearchResult>
         </ListContainer>
@@ -211,11 +189,6 @@ const FormControlLabelField = withStyles({
 	}
 })(FormControlLabel)
 
-const Tag = withStyles({
-  root: {
-    marginLeft: '5px'
-  }
-})(Chip)
 
 const CheckField = withStyles({
 	root: {
@@ -238,16 +211,12 @@ const SearchButton = withStyles({
 	}
 })(Button)
 
-const Container = withStyles({
-  root: {
-  }
-})(MuiThemeProvider)
 
 const ListContainer = withStyles({
   root: {
-    marginTop: '64px',
-    height: '100%',
-    width: '100%'
+     width: '80%',
+     height: '100%',
+     background: 'white'
   }
 })(FormControl)
 
@@ -261,11 +230,14 @@ const SearchField = withStyles({
   }
 })(TextField)
 
-const ListItemContents = withStyles({
-  root: {
-    borderBottom: 'solid 1px #ADADAD'
-  }
-})(ListItem)
+const Container = styled.div `
+  width: 100%;
+  height: 100%;
+  margin-top: 64px;
+  text-align: center
+`
+
+
 
 const ModalContainer = styled.div `
 	text-align: center;
@@ -282,9 +254,4 @@ const SearchResult = styled.div `
   margin: 0 auto;
   margin-top: 30px;
 `
-
-
-//background-image: url("/static/media/react.876a8325.svg");
-//image="/static/images/cards/contemplative-reptile.jpg"
-//../../img/javascript.svg
-//image={`../../img/${item.langImg}`}
+export default firebaseConnect()(List)

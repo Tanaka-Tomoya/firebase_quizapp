@@ -19,11 +19,6 @@ const WelcomeContainer = styled.div `
 	background: url(${process.env.PUBLIC_URL + '/welcome.jpg'})　;
 	background-size:cover;
 `
-const BackgroundImg = styled.img `
-	width: 100%;
-	height: 1000px;
-	padding-top: 64px;
-`
 
 const TypographyField = styled.div `
 	width: 100%;

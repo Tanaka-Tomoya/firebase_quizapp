@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { MuiThemeProvider, withStyles } from '@material-ui/core/styles'
-import { theme } from '../../ults/theme'
+import { withStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';

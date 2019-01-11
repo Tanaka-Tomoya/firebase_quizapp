@@ -5,8 +5,7 @@ import  questionList  from './questionList'
 
 const rootReducer = combineReducers ({
 	firebase: firebaseReducer,
-	questionList: questionList
-
+	questionList
 })
 
 export default rootReducer;

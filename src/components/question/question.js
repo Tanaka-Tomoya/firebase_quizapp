@@ -15,7 +15,6 @@ import RadioButtonChecked from '@material-ui/icons/RadioButtonChecked'
 import {theme} from '../../ults/theme.js'
 import Modal from '@material-ui/core/Modal';
 import { Link } from 'react-router-dom'
-import { MainTypography } from '../../ults/theme';
 
 
 
@@ -57,12 +56,6 @@ const RadioButton = withStyles({
     fontSize: '30px'
   }
 })(Radio)
-
-const ModalTypography = withStyles({
-  root: {
-
-  }
-})(MainTypography)
 
 const UncheckedButton = withStyles({
   root: {
@@ -263,9 +256,4 @@ const ModalDiv = styled.div `
 	width: 75%;
 	height: 75%;
 	background: white;
-`
-
-const SubmitButtonWord = styled.p `
-  font-size: 50px;
-  color: white;
 `
