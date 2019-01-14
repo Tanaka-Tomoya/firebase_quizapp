@@ -21,14 +21,16 @@ export const getListItemsError = status => ({
 	hasError: status
 })
 
-export const fetchListItems = () => {
+export const fetchListItems = (tag) => {
 	return (dispatch) => {
 		dispatch(loadListItems(true));
 
-		questionsRef.on('value', function(snapshot) {
+		questionsRef.orderByChild('tag').startAt(tag).endAt(tag)
+		.once('value', function(snapshot) {
 			console.log(snapshot.val())
-			dispatch(fetchListItemsSuccess(snapshot.val()))
-		})
+				dispatch(loadListItems(false))
+				dispatch(fetchListItemsSuccess(snapshot.val()))
+			})
 	}
 }
 

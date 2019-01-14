@@ -8,28 +8,9 @@ import Question from '../components/question/question'
 import Home from '../components/home/home'
 import MenuBar from '../components/general/appbar'
 import Welcome from '../components/welcome/welcome'
-import { compose } from 'redux';
-import { reactReduxFirebase, getFirebase } from 'react-redux-firebase'
-import firebase from 'firebase'
-import rootReducer from '../reducers/index'
-import firebaseConfig from '../firebase/config'
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import { createLogger } from 'redux-logger';
+import configureStore from '../store/index'
 
-const loggerMiddleware = createLogger();
-firebase.initializeApp(firebaseConfig);  // #2
-
-
-const createStoreWithFirebase = compose(
-  applyMiddleware(
-    thunk.withExtraArgument({getFirebase}),
-    loggerMiddleware
-  ),
-  reactReduxFirebase(firebase, {})
-)(createStore);
-
-const store = createStoreWithFirebase(rootReducer);
+const store = configureStore()
 
 
 export default class App extends Component {

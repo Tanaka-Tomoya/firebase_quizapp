@@ -1,16 +1,34 @@
-import { GET_QUESTIONS_ITEM } from '../actions/List'
+import {
+	FETCH_LIST_ITEMS_SUCCESS,
+	LOAD_LIST_ITEMS,
+	GET_LIST_ITEMS_ERROR
+} from '../actions/List'
 
-const initialState = {
-	items: []
-}
-
-export default function questionList(state = initialState, action) {
+export const items = (state = [], action) => {
 	switch(action.type) {
-		case GET_QUESTIONS_ITEM:
-      return Object.assign({}, state, {
-				items: action.item
-			});
+		case FETCH_LIST_ITEMS_SUCCESS:
+			return action.items
 		default:
 			return state;
+	}
+}
+
+
+export const loadListItems = (state = false, action) => {
+	switch(action.type) {
+		case LOAD_LIST_ITEMS:
+			return action.isLoading;
+		default:
+			return state;
+	}
+}
+
+export const getListItemsError = (state = false, action) => {
+	switch(action.type) {
+		case GET_LIST_ITEMS_ERROR:
+			return action.hasError;
+		default:
+			return state;
+
 	}
 }

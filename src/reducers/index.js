@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
-import { firebaseReducer } from 'react-redux-firebase'
-import  questionList  from './questionList'
+import { items, loadListItems, getListItemsError } from './List'
 
 
 const rootReducer = combineReducers ({
-	firebase: firebaseReducer,
-	questionList
+	items,
+	loadListItems,
+	getListItemsError
 })
 
 export default rootReducer;
