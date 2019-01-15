@@ -17,7 +17,6 @@ import Check from '@material-ui/icons/Check'
 import { Link } from 'react-router-dom'
 import { theme } from '../../ults/theme'
 
-console.log(theme.palette.secondary.main)
 
 let id = 0;
 function createData(number, isCorrect) {
