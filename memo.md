@@ -28,3 +28,32 @@ import {XXXXXX} from './example'
 
 <Route exact path='/hogehoge/:id' component={hogehoge} />
 この書き方だとOK
+
+
+
+"question_content" : {
+	"1" : {
+		"content_1" : {
+			"id" : "1",
+	}
+}
+
+このような場合
+database.ref("question_content").orderByChild('id')
+はnull
+
+orderByChildは一階層しか貫通できない
+
+"question_content" : {
+	"1" : {
+	"content_1" : {
+		"id" : "1",
+}
+
+これで取得できる
+
+Object.assign(元となるオブジェクト, マージするオブジェクト)
+第三以降の引数もマージするオブジェクト
+example:
+const hoge = { hoge: 'hoge'}
+const unko = Object.assign({}, hoge)

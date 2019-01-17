@@ -4,9 +4,7 @@ import { fetchListItems } from '../actions/List'
 
 function mapStateToProps(state) {
 	return {
-		items: state.items,
-		isLoading: state.loadListItems,
-		hasError: state.loadListItems
+		list: state.list
 	}
 }
 

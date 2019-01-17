@@ -1,11 +1,10 @@
 import { combineReducers } from 'redux';
-import { items, loadListItems, getListItemsError } from './List'
-
+import question from './Question'
+import list from './List'
 
 const rootReducer = combineReducers ({
-	items,
-	loadListItems,
-	getListItemsError
+	list,
+	question
 })
 
 export default rootReducer;

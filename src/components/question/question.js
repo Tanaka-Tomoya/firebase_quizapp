@@ -3,17 +3,11 @@ import MobileStepper from '@material-ui/core/MobileStepper';
 import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography'
 import { MuiThemeProvider, withStyles } from '@material-ui/core/styles';
-import CheckCircleOutline from '@material-ui/icons/CheckCircleOutline'
-import ArrowForward from '@material-ui/icons/ArrowForward'
-import Button from '@material-ui/core/Button';
 import {theme} from '../../ults/theme.js'
 import AnswerField from './AnswerField'
 import AnswerResultModal from './AnswerResultModal'
 
-
-
-
-export default class question extends Component {
+export default class Question extends Component {
 
 	state = {
 		open: false,
@@ -22,7 +16,7 @@ export default class question extends Component {
 	}
 
   handleChange = event => {
-  this.setState({ selectedValue: event.target.value });
+  	this.setState({ selectedValue: event.target.value });
   };
 
 	handleOpen = () => {
@@ -30,11 +24,13 @@ export default class question extends Component {
 	};
 
 
-	ComponentWillMount() {
+	componentDidMount() {
+		const { questionId } = this.props.match.params
+		this.props.fetchQuestionContents(questionId)
 	}
 	render() {
-    const { questionId } = this.props.match.params
-    console.log(questionId)
+		const { items } = this.props.question
+		console.log(items)
 		return (
 		<Container theme={theme} >
       <AnswerResultModal open={this.state.open}/>

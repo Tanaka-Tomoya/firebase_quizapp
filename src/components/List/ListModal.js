@@ -5,8 +5,6 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import languages from './LangArray'
 import LangCard from './LangCard'
-import { theme } from '../../ults/theme'
-import Button from '@material-ui/core/Button';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
@@ -36,10 +34,7 @@ export default class ListModal extends Component {
     this.setState({ value });
   };
 	render() {
-		console.log(this.props.open)
     const { value } = this.state
-    console.log(this.state.value)
-    console.log(languages.slice(8))
 		return (
 			<Modal
 				open={this.props.open}

@@ -1,15 +1,20 @@
 import { connect } from 'react-redux'
-import { question } from '../components/question/question'
+import Question  from '../components/question/question'
+import { fetchQuestionContents } from '../actions/Question'
 
 function mapStateToProps(state) {
-	return state;
+	return {
+		question: state.question
+	}
 }
 
-function mapDispatchToProp(dispatch) {
-	return dispatch;
+function mapDispatchToProps(dispatch) {
+	return {
+		fetchQuestionContents: (questionId) => dispatch(fetchQuestionContents(questionId))
+	}
 }
 
 export default connect(
 	mapStateToProps,
-	mapDispatchToProp
-)(question)
+	mapDispatchToProps
+)(Question)
