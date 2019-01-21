@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { MuiThemeProvider, withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -17,7 +17,7 @@ export default class AnswerField extends Component {
 			<FormContainer>
 				<RadioContainer>
 					<FormControlLabel
-						label={<RadioButtonValue>A</RadioButtonValue>}
+						label={<RadioButtonValue>{ this.props.option.a }</RadioButtonValue>}
 						control={<Radio
 										 checked={this.props.selectedValue === 'A'}
 										 onChange={this.props.handleChange}
@@ -28,7 +28,7 @@ export default class AnswerField extends Component {
 									/>}
 						/>
 					<FormControlLabel
-						label={<RadioButtonValue>B</RadioButtonValue>}
+						label={<RadioButtonValue>{ this.props.option.b }</RadioButtonValue>}
 						control={<Radio
 										 checked={this.props.selectedValue === 'B'}
 										 onChange={this.props.handleChange}
@@ -39,7 +39,7 @@ export default class AnswerField extends Component {
 									/>}
 						/>
 					<FormControlLabel
-						label={<RadioButtonValue>C</RadioButtonValue>}
+						label={<RadioButtonValue>{ this.props.option.c }</RadioButtonValue>}
 						control={<Radio
 										 checked={this.props.selectedValue === 'C'}
 										 onChange={this.props.handleChange}
@@ -50,7 +50,7 @@ export default class AnswerField extends Component {
 									/>}
 						/>
 						<FormControlLabel
-							label={<RadioButtonValue>D</RadioButtonValue>}
+							label={<RadioButtonValue>{ this.props.option.d }</RadioButtonValue>}
 							control={<Radio
 											 checked={this.props.selectedValue === 'D'}
 											 onChange={this.props.handleChange}

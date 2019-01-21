@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { MuiThemeProvider, withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom'
 import Modal from '@material-ui/core/Modal';
 import Typography from '@material-ui/core/Typography'
 import CheckCircleOutline from '@material-ui/icons/CheckCircleOutline'
 import ArrowForward from '@material-ui/icons/ArrowForward'
+import FalseIcon from '@material-ui/icons/Clear'
 
 function getModalStyle() {
   const top = 50
@@ -21,6 +22,14 @@ function getModalStyle() {
 
 export default class AnswerResultModal extends Component {
 	render() {
+    // console.log(this.props.userAnswer)
+    // console.log(this.props.questionAnswer)
+    const { userAnswer } = this.props
+    const { questionAnswer } = this.props
+    const { questionId } = this.props
+    const { questionNumber } = this.props
+    const num = Number(questionNumber) + 1
+    console.log(num)
 		return (
 			<Modal
 				aria-labelledby="simple-modal-title"
@@ -29,10 +38,21 @@ export default class AnswerResultModal extends Component {
 			>
 
 				<ModalDiv style={getModalStyle()}>
-					<Circle></Circle>
-					<Typography variant="h2">正解です！</Typography>
-					<Typography variant="display1" gutterBottom>この調子でがんばりましょう！</Typography>
-					<Link to='/result'>
+          {userAnswer === questionAnswer &&
+            <React.Fragment>
+              <True/>
+    					<Typography variant="h2">正解です！</Typography>
+    					<Typography variant="display1" gutterBottom>この調子でがんばりましょう！</Typography>
+            </React.Fragment>
+          }
+          {userAnswer !== questionAnswer &&
+            <React.Fragment>
+              <False/>
+              <Typography variant="h2">不正解</Typography>
+              <Typography variant="display1" gutterBottom>惜しかったねぇ...</Typography>
+            </React.Fragment>
+          }
+					<Link to={`/question/${questionId}/${num}`} onClick={() => this.props.handleClose()}>
 						<Forward/>
 					</Link>
 				</ModalDiv>
@@ -42,13 +62,21 @@ export default class AnswerResultModal extends Component {
 }
 
 
-const Circle = withStyles({
+const True = withStyles({
   root: {
     textAlign: 'center',
     color: '#FFA000',
     fontSize: '350px'
   }
 })(CheckCircleOutline)
+
+const False = withStyles({
+  root: {
+    textAlign: 'center',
+    color: '#00B8D4',
+    fontSize: '350px'
+  }
+})(FalseIcon)
 
 const Forward = withStyles({
   root: {

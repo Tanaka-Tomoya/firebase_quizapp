@@ -22,34 +22,57 @@ export default class Question extends Component {
 	handleOpen = () => {
 	  this.setState({ open: true });
 	};
+	handleClose = () => {
+		this.setState({ open: false});
+	}
 
-
-	componentDidMount() {
+	componentWillMount() {
 		const { questionId } = this.props.match.params
-		this.props.fetchQuestionContents(questionId)
+		const { questionNumber } = this.props.match.params
+		this.props.fetchQuestionContents(questionId, questionNumber)
 	}
 	render() {
-		const { items } = this.props.question
-		console.log(items)
-		return (
-		<Container theme={theme} >
-      <AnswerResultModal open={this.state.open}/>
-			<QuestionContainer>
-        <Stepper
-          variant="dots"
-          steps={6}
-          position="static"
-          activeStep={this.state.activeStep}
-        />
-  			<QuestionTypography variant="h2">Q.TestTest</QuestionTypography>
-        <AnswerField
-          handleOpen={() => this.handleOpen()}
-          handleChange={event => this.handleChange(event)}
-          selectedValue={this.state.selectedValue}
-          />
-    	</QuestionContainer>
-		</Container>
-		)
+		if (this.props.question.isLoading) {
+			return (
+				<info>ロード中</info>
+			)
+		} else if(this.props.question.hasError) {
+			return (
+				<div>エラー</div>
+			)
+		} else {
+			const { items } = this.props.question
+			const { length } = this.props.question
+			const { questionNumber } = this.props.match.params
+			const { questionId } = this.props.match.params
+			return (
+				<Container theme={theme} >
+					<AnswerResultModal
+						open={this.state.open}
+						userAnswer={this.state.selectedValue}
+						questionAnswer={items.answer}
+						questionId={questionId}
+						questionNumber={questionNumber}
+						handleClose={() => this.handleClose()}
+						/>
+					<QuestionContainer>
+						<Stepper
+							variant="dots"
+							steps={length}
+							position="static"
+							activeStep={this.state.activeStep}
+						/>
+					<QuestionTypography variant="h2">Q.{questionNumber}  {items.question_title}</QuestionTypography>
+						<AnswerField
+							handleOpen={() => this.handleOpen()}
+							handleChange={event => this.handleChange(event)}
+							selectedValue={this.state.selectedValue}
+							option={items.option}
+							/>
+					</QuestionContainer>
+				</Container>
+			)
+		}
 	}
 }
 
@@ -60,6 +83,9 @@ const Container = withStyles({
   }
 })(MuiThemeProvider)
 
+const info = styled.div`
+	background-color: black;
+`
 
 
 const QuestionTypography = withStyles({

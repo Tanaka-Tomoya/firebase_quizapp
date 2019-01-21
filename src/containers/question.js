@@ -10,7 +10,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		fetchQuestionContents: (questionId) => dispatch(fetchQuestionContents(questionId))
+		fetchQuestionContents: (questionId, questionNumber) => dispatch(fetchQuestionContents(questionId, questionNumber))
 	}
 }
 

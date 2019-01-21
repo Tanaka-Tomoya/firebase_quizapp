@@ -57,3 +57,8 @@ Object.assign(元となるオブジェクト, マージするオブジェクト)
 example:
 const hoge = { hoge: 'hoge'}
 const unko = Object.assign({}, hoge)
+
+
+
+初期化メソッドをコードの洗礼を目的に２つのところで書かない
+-必ず、初期化メソッドは一度しか実行しない-

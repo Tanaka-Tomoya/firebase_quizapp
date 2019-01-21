@@ -6,7 +6,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProp(dispatch) {
-	return dispatch;
+	return {dispatch};
 }
 
 export default connect(
