@@ -1,8 +1,12 @@
 import  {
 	CREATE_ACCOUNT_SUCCESS,
-	LOAD_CREATE_ACCOUNT,
-	GET_CREATE_ACCOUNT_ERROR
 } from '../actions/UserAuth'
+
+import {
+	START_LOAD_FIREBASE,
+	END_LOAD_FIREBASE,
+	GET_LOAD_FIREBASE_ERROR
+} from '../actions/App'
 
 const initialState ={
 	items: [],
@@ -14,14 +18,18 @@ const UserAuth = (state = initialState, action) => {
 	switch(action.type) {
 		case CREATE_ACCOUNT_SUCCESS:
 			return state;
-		case LOAD_CREATE_ACCOUNT:
-			Object.assign({}, state, {
+		case START_LOAD_FIREBASE:
+			return Object.assign({}, state, {
 				isLoading: action.isLoading
-		})
-		case GET_CREATE_ACCOUNT_ERROR:
-			Object.assign({}, state, {
+			})
+		case END_LOAD_FIREBASE:
+			return Object.assign({}, state, {
+				isLoading: action.isLoading
+			})
+		case GET_LOAD_FIREBASE_ERROR:
+			return Object.assign({}, state, {
 				hasError: action.hasError
-		})
+			})
 		default:
 			return state;
 	}

@@ -1,8 +1,12 @@
 import {
 	FETCH_QUESTION_CONTENTS_SUCCESS,
-	LOAD_QUESTION_CONTENTS,
-	GET_QUESTION_CONTENTS_ERROR
 } from '../actions/Question'
+
+import {
+	START_LOAD_FIREBASE,
+	END_LOAD_FIREBASE,
+	GET_LOAD_FIREBASE_ERROR
+} from '../actions/App'
 
 const initialState = {
 	items: [],
@@ -18,11 +22,15 @@ const Question = (state = initialState, action) => {
 				items: action.items,
 				length: action.length
 			})
-		case LOAD_QUESTION_CONTENTS:
+		case START_LOAD_FIREBASE:
 			return Object.assign({}, state, {
 				isLoading: action.isLoading
 			})
-		case GET_QUESTION_CONTENTS_ERROR:
+		case END_LOAD_FIREBASE:
+			return Object.assign({}, state, {
+				isLoading: action.isLoading
+			})
+		case GET_LOAD_FIREBASE_ERROR:
 			return Object.assign({}, state, {
 				hasError: action.hasError
 			})

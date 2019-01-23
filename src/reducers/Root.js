@@ -1,6 +1,6 @@
 import {
-	FETCH_LIST_ITEMS_SUCCESS,
-} from '../actions/List'
+	LOGIN_CONFIRM_SUCCESS,
+} from '../actions/Root'
 
 import {
 	START_LOAD_FIREBASE,
@@ -9,16 +9,16 @@ import {
 } from '../actions/App'
 
 const initialState = {
-	items: [],
+	uid: null,
 	isLoading: true,
 	hasError: false
 }
 
-const List = (state = initialState, action) => {
+const Root = (state = initialState, action) => {
 	switch(action.type) {
-		case FETCH_LIST_ITEMS_SUCCESS:
+		case LOGIN_CONFIRM_SUCCESS:
 			return Object.assign({}, state, {
-				items: action.items
+				uid: action.uid
 			})
 		case START_LOAD_FIREBASE:
 			return Object.assign({}, state, {
@@ -33,8 +33,8 @@ const List = (state = initialState, action) => {
 				hasError: action.hasError
 			})
 		default:
-			return state;
+			return state
 	}
 }
 
-export default List
+export default Root
