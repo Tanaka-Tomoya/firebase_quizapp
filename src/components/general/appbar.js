@@ -11,6 +11,9 @@ import {theme} from '../../ults/theme'
 
 
 export default class MenuBar extends Component {
+	componentWillMount() {
+		this.props.getUserProfile()
+	}
 	render() {
 		return (
 			<Div theme={theme}>

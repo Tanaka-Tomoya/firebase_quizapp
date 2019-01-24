@@ -62,3 +62,9 @@ const unko = Object.assign({}, hoge)
 
 初期化メソッドをコードの洗礼を目的に２つのところで書かない
 -必ず、初期化メソッドは一度しか実行しない-
+
+
+
+firebaseApp.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+初期化したfirebase(firebaseApp)とは別に
+'firebase/app';からインポートしてそれをsetPersistenceの引数に渡すメソッドしなければならない

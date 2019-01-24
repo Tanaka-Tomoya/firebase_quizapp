@@ -5,23 +5,28 @@ import styled from 'styled-components'
 import List from '../containers/List'
 import Question from '../containers/question'
 import Home from '../components/home/home'
-import MenuBar from '../components/general/appbar'
+import MenuBar from '../containers/Appbar'
 import Welcome from '../components/welcome/welcome'
 import Signup from '../containers/Signup'
 import Result from '../components/questionResult/questionResult'
+import { firebaseApp } from '../firebase/config'
 
 
 export default class Root extends Component {
 	loginConfirmIfNeeded() {
-		if(!localStorage.getItem('uid')){
-			this.props.loginConfirm()
-		} else {
-
-		}
 	}
 
 	componentDidMount() {
-		this.loginConfirmIfNeeded()
+		//this.loginConfirmIfNeeded()
+		firebaseApp.auth().onAuthStateChanged(function(user) {
+		  if (user) {
+		    // User is signed in.
+				console.log(user)
+		  } else {
+		    // No user is signed in.
+				console.log('user not found')
+		  }
+		});
 	}
 
 	componentWillUpdate(nextProps) {
@@ -30,8 +35,6 @@ export default class Root extends Component {
 
 	render() {
 		const { uid } = this.props.root
-		console.log(this.props.root)
-		console.log(localStorage.getItem('uid'))
 		return (
 			<AppDiv>
 					{localStorage.getItem('uid') &&
@@ -58,10 +61,3 @@ const AppDiv = styled.div`
   width: 100%;
   height: 1000px;
 `
-
-// <React.Fragment>
-// 	<Switch>
-// 		<Route exact path='/' component={Home}/>
-// 		<Route exact path='/signup' component={Signup} />
-// 	</Switch>
-// </React.Fragment>

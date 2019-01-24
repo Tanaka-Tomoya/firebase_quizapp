@@ -5,11 +5,9 @@ import { withRouter } from 'react-router-dom';
 import { compose } from 'redux'
 
 function mapStateToProps(state,props) {
-	console.log(props)
 	const { location } = props.history
 	return {
 		location: location,
-		router: state.router
 	}
 }
 

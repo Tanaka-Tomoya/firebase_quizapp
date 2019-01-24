@@ -8,7 +8,6 @@ import Button from '@material-ui/core/Button'
 import { reduxForm, Field, FieldArray } from 'redux-form'
 import {theme} from '../../ults/theme.js'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router';
 import { compose } from 'redux'
 
 
@@ -42,12 +41,9 @@ class Signup extends Component {
 
   submit = (values) => {
     this.props.createAccount(values.email, values.password, values.user_name)
-    console.log(this.props)
 
   }
   componentWillMount() {
-    console.log(this.props)
-    console.log(this.props.router)
   }
 
 	render() {

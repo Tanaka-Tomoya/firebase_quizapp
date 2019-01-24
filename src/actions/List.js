@@ -25,8 +25,3 @@ export const fetchListItems = (tag) => {
 			})
 	}
 }
-
-
-// hoge.on('value', function(snapshot) {
-// 	console.log(snapshot.val())
-// });
