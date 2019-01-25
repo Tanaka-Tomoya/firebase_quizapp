@@ -9,7 +9,7 @@ export const startLoadFirebase = () => ({
 })
 
 export const endLoadFirebase = () => ({
-	type: START_LOAD_FIREBASE,
+	type: END_LOAD_FIREBASE,
 	isLoading: false
 })
 

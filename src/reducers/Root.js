@@ -1,5 +1,5 @@
 import {
-	LOGIN_CONFIRM_SUCCESS,
+	CONFIRM_USER_LOGIN,
 } from '../actions/Root'
 
 import {
@@ -9,16 +9,16 @@ import {
 } from '../actions/App'
 
 const initialState = {
-	uid: null,
+	isUser: false,
 	isLoading: true,
 	hasError: false
 }
 
 const Root = (state = initialState, action) => {
 	switch(action.type) {
-		case LOGIN_CONFIRM_SUCCESS:
+		case CONFIRM_USER_LOGIN:
 			return Object.assign({}, state, {
-				uid: action.uid
+				isUser: action.isUser,
 			})
 		case START_LOAD_FIREBASE:
 			return Object.assign({}, state, {

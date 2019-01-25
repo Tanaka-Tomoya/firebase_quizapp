@@ -5,6 +5,7 @@ import { startLoadFirebase,
 				 endLoadFirebase,
 				 getErrorLoadFirebase
  } from './App'
+ import { fetchUserProfile } from './Appbar'
 import firebase from 'firebase/app';
 
 export const CREATE_ACCOUNT_SUCCESS = 'CREATE_ACCOUNT_SUCCESS'
@@ -22,7 +23,6 @@ export const createAccount = (email, password, user_name) => {
 		.then(() => {
 			firebaseApp.auth().createUserWithEmailAndPassword(email,password)
 			.then( (user) => {
-				console.log(user_name)
 				user.user.updateProfile({
 					displayName: user_name
 				})

@@ -5,21 +5,24 @@ import { startLoadFirebase,
 				 getErrorLoadFirebase
  } from './App'
 
-export const LOGIN_CONFIRM_SUCCESS = 'LOGIN_CONFIRM_SUCCESS'
+export const CONFIRM_USER_LOGIN = 'CONFIRM_USER_LOGIN'
 
-export const loginConfirmSuccess = (uid) => ({
-	type: LOGIN_CONFIRM_SUCCESS,
-	uid
+export const confirmUserLogin = (isUser) => ({
+	type: CONFIRM_USER_LOGIN,
+	isUser,
 })
 
 export const loginConfirm = () => {
 	return(dispatch) => {
 		dispatch(startLoadFirebase())
-		const user = firebaseApp.auth().currentUser
-		if(user) {
-			localStorage.setItem('uid', user.uid)
-			dispatch(loginConfirmSuccess(user.uid))
-		}
-		dispatch(endLoadFirebase())
+		firebaseApp.auth().onAuthStateChanged((user) => {
+			if (user) {
+				dispatch(confirmUserLogin(true))
+				dispatch(endLoadFirebase())
+			} else {
+				dispatch(confirmUserLogin(false))
+						dispatch(endLoadFirebase())
+			}
+			})
 	}
 }

@@ -68,3 +68,37 @@ const unko = Object.assign({}, hoge)
 firebaseApp.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
 初期化したfirebase(firebaseApp)とは別に
 'firebase/app';からインポートしてそれをsetPersistenceの引数に渡すメソッドしなければならない
+
+
+
+stateを参照する際に
+
+function hoge() {
+	this.setState({hoge : true})
+}
+これはsetState が　Typeerrorとなる
+この関数をアロー関数にすることによってsetStateが通る
+
+
+アロ-=>にはthisを渡すという意味がある
+
+class CountUp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { count: 0 };
+  }
+
+  handleClick(e) {
+    this.setState({ count: this.state.count + 1 });
+  }
+
+  render() {
+    return(
+      <button onClick={(e) => this.handleClick(e)}>
+        {this.state.count}
+      </button>
+    );
+  }
+}
+
+この例ではCountUp

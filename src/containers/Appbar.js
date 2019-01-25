@@ -4,7 +4,9 @@ import { fetchUserProfile } from '../actions/Appbar'
 
 
 const mapStateToProps = (state) => {
-	return state
+	return {
+		appbar: state.appbar
+	}
 }
 
 const mapDispatchToProps = (dispatch) => {
