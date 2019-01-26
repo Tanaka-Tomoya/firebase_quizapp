@@ -11,13 +11,15 @@ import {
 const initialState ={
 	items: [],
 	isLoading: false,
-	hasError: false
+	hasError: false,
 }
 
 const UserAuth = (state = initialState, action) => {
 	switch(action.type) {
 		case CREATE_ACCOUNT_SUCCESS:
-			return state;
+			return Object.assign({}, state, {
+				first: action.first
+			})
 		case START_LOAD_FIREBASE:
 			return Object.assign({}, state, {
 				isLoading: action.isLoading

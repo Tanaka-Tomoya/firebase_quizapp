@@ -10,9 +10,9 @@ import firebase from 'firebase/app';
 
 export const CREATE_ACCOUNT_SUCCESS = 'CREATE_ACCOUNT_SUCCESS'
 
-export const createAccountSuccess = (items) => ({
+export const createAccountSuccess = () => ({
 	type: CREATE_ACCOUNT_SUCCESS,
-	items
+	first: true
 })
 
 
@@ -27,7 +27,7 @@ export const createAccount = (email, password, user_name) => {
 					displayName: user_name
 				})
 				.then( () => {
-					dispatch(push('/'));
+					dispatch(push('/signupSuccess'));
 				})
 			})
 		})
@@ -37,5 +37,26 @@ export const createAccount = (email, password, user_name) => {
 			console.log(error.code)
 		})
 		dispatch(endLoadFirebase())
+	}
+}
+
+export const login = (email, password) => {
+	return(dispatch) => {
+		dispatch(startLoadFirebase());
+		firebaseApp.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+		.then(() => {
+			firebase.auth().signInWithEmailAndPassword(email, password)
+			.then(() => {
+				dispatch(endLoadFirebase())
+			})
+			.then(() => {
+				dispatch(push('/'));
+			})
+		})
+		.catch(function(error) {
+			dispatch(getErrorLoadFirebase())
+			console.log(error.message)
+			console.log(error.code)
+		});
 	}
 }

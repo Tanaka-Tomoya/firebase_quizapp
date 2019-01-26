@@ -32,15 +32,14 @@ const renderTextField = ({
   />
 )
 
-class Signup extends Component {
+class Signin extends Component {
 
 	constructor(props) {
 		super(props)
 	}
 
   submit = (values) => {
-    this.props.createAccount(values.email, values.password, values.user_name)
-
+		this.props.login(values.email, values.password)
   }
   componentWillMount() {
   }
@@ -52,14 +51,12 @@ class Signup extends Component {
 				<SignupContainer>
 					<SignupContent onSubmit={handleSubmit(this.submit)}>
 						<SignupTitle>
-							<WhiteTypography variant="h3">Create Account</WhiteTypography>
+							<WhiteTypography variant="h3">Login</WhiteTypography>
 						</SignupTitle>
 						<FormContainer>
 							<FormContent>
-							 <Field name='user_name' label='ユーザーネーム' component={renderTextField} required />
 							 <Field name='email' label='メールアドレス' component={renderTextField} required />
  							 <Field name='password' type='password' label='パスワード' component={renderTextField} required />
-							 <Field name='password_confirm' type='password' label='パスワードと同じ値を入力してください' component={renderTextField} required />
  							 <SubmitButton type='submit' size='large' variant='outlined' color="secondary">登録する</SubmitButton>
 							</FormContent>
 						</FormContainer>
@@ -109,7 +106,7 @@ const FormContent = styled.div `
 	height: 100%;
 	width: 100%;
 	position: absolute;
-	top: 50%;
+	top: 65%;
 	left: 50%;
 	transform: translate( -50%, -50%);
 
@@ -141,24 +138,15 @@ const SignupTitle = styled.div `
 
 
 export default reduxForm({
-    form: 'Signup',
+    form: 'Signin',
   	validate: values => {
   	    const errors = {}
-  	    if (!values.user_name) {
-  	      errors.user_name = '必須項目です'
-  	    }
   			if (!values.email) {
   				errors.email = '必須項目です'
   			}
   	    if (!values.password) {
   	      errors.password = '必須項目です'
   	    }
-  			if (!values.password_confirm) {
-  				errors.password_confirm = '必須項目です'
-  			}
-  			if (values.password !== values.password_confirm ) {
-  				errors.password_confirm = 'パスワード一致しません'
-  			}
   	    return errors
   	  }
-  })(Signup)
+  })(Signin)

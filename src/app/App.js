@@ -7,7 +7,8 @@ import { Route } from 'react-router'
 import { history, configureStore } from '../store/index'
 import { firebaseApp } from '../firebase/config'
 import Root from '../containers/Root'
-
+import SignupSuccess from '../containers/SignupSuccess'
+import { Switch } from 'react-router-dom'
 
 const store = configureStore()
 
@@ -29,7 +30,7 @@ export default class App extends Component {
     return (
         <Provider store={store}>
           <ConnectedRouter history={history}>
-            <Root/>
+              <Root/>
           </ConnectedRouter>
         </Provider>
     );

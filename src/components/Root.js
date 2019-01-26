@@ -4,10 +4,12 @@ import { Route } from 'react-router'
 import styled from 'styled-components'
 import List from '../containers/List'
 import Question from '../containers/question'
-import Home from '../components/home/home'
+import Home from '../components/Home/Home'
 import MenuBar from '../containers/Appbar'
-import Welcome from '../components/welcome/welcome'
 import Signup from '../containers/Signup'
+import Signin from '../containers/Signin'
+import SignupSuccess from '../containers/SignupSuccess'
+import Welcome from './welcome/welcome'
 import Result from '../components/questionResult/questionResult'
 import { firebaseApp } from '../firebase/config'
 
@@ -35,17 +37,21 @@ export default class Root extends Component {
 					<MenuBar/>
 					<Switch>
 						<Route exact path='/' component={Home} />
-						<Route exact path='/welcome' render={() => <Welcome />} />
-						<Route exact path='/question/:questionId/:questionNumber' component={Question} />
-						<Route exact path='/result' render={() => <Result/> }  />
-						<Route exact path='/list' render={() => <List/> } />
+						<Route path='/question/:questionId/:questionNumber' component={Question} />
+						<Route path='/result' render={() => <Result/> }  />
+						<Route path='/list' render={() => <List/> } />
+						<Route path='/SignupSuccess' component={SignupSuccess}/>
 					</Switch>
 				</AppDiv>
 			)
 		}else if(!isUser) {
 			return(
 				<AppDiv>
-					<Route exact path='/' component={Signup} />
+					<Switch>
+						<Route  exact path='/' component={Welcome} />
+						<Route  path='/signup' component={Signup} />
+						<Route  path='/signin' component={Signin} />
+					</Switch>
 				</AppDiv>
 			)
 		}
