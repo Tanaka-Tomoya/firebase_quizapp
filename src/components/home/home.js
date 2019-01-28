@@ -20,7 +20,7 @@ export default class Home extends Component {
 						<AnswerCard>
 							<OptionCardArea>
 								<OptionCardMedia
-									image={process.env.PUBLIC_URL + "answer.svg"}
+									image={process.env.PUBLIC_URL + "answer.png"}
 								/>
 								<OptionCardContent>
 									<WhiteTypography gutterBottom variant="h5" component="h2" color="default">作る</WhiteTypography>
@@ -32,7 +32,7 @@ export default class Home extends Component {
 						<CreateCard>
 							<OptionCardArea>
 								<OptionCardMedia
-									image={process.env.PUBLIC_URL + "create.svg"}
+									image={process.env.PUBLIC_URL + "make.png"}
 								/>
 								<OptionCardContent>
 									<WhiteTypography gutterBottom variant="h5" component="h2" color="default">問題を作る</WhiteTypography>
@@ -44,7 +44,7 @@ export default class Home extends Component {
 						<ReviewCard>
 							<OptionCardArea>
 								<OptionCardMedia
-									image={process.env.PUBLIC_URL + "review.svg"}
+									image={process.env.PUBLIC_URL + "review.png"}
 								/>
 								<OptionCardContent>
 									<WhiteTypography gutterBottom variant="h5" component="h2" color="default">作る</WhiteTypography>
@@ -120,7 +120,8 @@ const OptionCardContent = withStyles({
 const OptionCardMedia = withStyles({
 	root: {
 		height: '270px',
-		backgroundColor: '#66B4CE'
+		backgroundColor: '#66B4CE',
+		backgroundSize: 'contain'
 	}
 })(CardMedia)
 

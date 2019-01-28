@@ -15,12 +15,6 @@ const store = configureStore()
 
 
 export default class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      isLogin : false
-    }
-  }
 
   componentWillMount() {
   }
@@ -30,7 +24,10 @@ export default class App extends Component {
     return (
         <Provider store={store}>
           <ConnectedRouter history={history}>
-              <Root/>
+            <Switch>
+              <Route path='/SignupSuccess' component={SignupSuccess}/>
+              <Route path='/' component={Root}/>
+            </Switch>
           </ConnectedRouter>
         </Provider>
     );

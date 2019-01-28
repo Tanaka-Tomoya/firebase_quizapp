@@ -102,3 +102,31 @@ class CountUp extends React.Component {
 }
 
 この例ではCountUp
+
+App.js
+<ConnectedRouter history={history}>
+	<div>
+		<Route path='/' component={Root}/>
+	</div>
+</ConnectedRouter>
+
+Root
+<MenuBar/>
+<Switch>
+	<Route exact path={`${url}`} component={Home} />
+	<Route path={`${url}question/:questionId/:questionNumber`} component={Question} />
+	<Route path={`${url}result`} component={Result}  />
+	<Route exact path={`${url}list`} component={List} />
+</Switch>
+
+
+Appの<Route path='/' component={Root}/>にexactをつけるとurlが/の時しかrenderしなくなるのでexactはつけてはいけない。
+しかし、exactをつけないと
+<Route path='/' component={Root}/>
+<Route path='/SignupSuccess' component={SignupSuccess}/>
+となった際/にしかrenderしなくなるので
+
+<Route path='/SignupSuccess' component={SignupSuccess}/>
+<Route path='/' component={Root}/>
+
+このように/のパスを最後に判定するように書かなければならない

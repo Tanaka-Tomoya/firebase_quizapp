@@ -27,6 +27,9 @@ export default class Root extends Component {
 		const { isLoading } = this.props.root
 		const { hasError } = this.props.root
 		const { isUser } = this.props.root
+		const { url } = this.props.match
+		console.log(this.props.match.url)
+		console.log(this.props.match)
 		if(isLoading) {
 			return(
 				<Info>aaa</Info>
@@ -36,11 +39,10 @@ export default class Root extends Component {
 				<AppDiv>
 					<MenuBar/>
 					<Switch>
-						<Route exact path='/' component={Home} />
-						<Route path='/question/:questionId/:questionNumber' component={Question} />
-						<Route path='/result' render={() => <Result/> }  />
-						<Route path='/list' render={() => <List/> } />
-						<Route path='/SignupSuccess' component={SignupSuccess}/>
+						<Route exact path={`${url}`} component={Home} />
+						<Route path={`${url}question/:questionId/:questionNumber`} component={Question} />
+						<Route path={`${url}result`} component={Result}  />
+						<Route exact path={`${url}list`} component={List} />
 					</Switch>
 				</AppDiv>
 			)
