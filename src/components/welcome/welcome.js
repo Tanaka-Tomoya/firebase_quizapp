@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import Button from '@material-ui/core/Button'
 import { MuiThemeProvider, withStyles } from '@material-ui/core/styles'

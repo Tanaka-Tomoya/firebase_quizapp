@@ -1,8 +1,6 @@
 import { firebaseApp } from '../firebase/config'
-import { push } from 'react-router-redux'
 import { startLoadFirebase,
 				 endLoadFirebase,
-				 getErrorLoadFirebase
  } from './App'
 
 export const CONFIRM_USER_LOGIN = 'CONFIRM_USER_LOGIN'

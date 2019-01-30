@@ -6,7 +6,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography'
-import { firebaseApp } from '../../firebase/config'
+import { Link } from 'react-router-dom'
 
 export default class Home extends Component {
 	render() {
@@ -22,10 +22,12 @@ export default class Home extends Component {
 								<OptionCardMedia
 									image={process.env.PUBLIC_URL + "answer.png"}
 								/>
-								<OptionCardContent>
-									<WhiteTypography gutterBottom variant="h5" component="h2" color="default">作る</WhiteTypography>
-										<WhiteSubTypography component="p" color="default">言語ごとに分類された問題を解いて自分のスキルを確認しましょう！</WhiteSubTypography>
-								</OptionCardContent>
+								<LinkContainer to='/list'>
+									<OptionCardContent>
+										<WhiteTypography gutterBottom variant="h5" component="h2" color="default">解く</WhiteTypography>
+											<WhiteSubTypography component="p" color="default">言語ごとに分類された問題を解いて自分のスキルを確認しましょう！</WhiteSubTypography>
+									</OptionCardContent>
+								</LinkContainer>
 							</OptionCardArea>
 						</AnswerCard>
 
@@ -34,10 +36,12 @@ export default class Home extends Component {
 								<OptionCardMedia
 									image={process.env.PUBLIC_URL + "make.png"}
 								/>
-								<OptionCardContent>
-									<WhiteTypography gutterBottom variant="h5" component="h2" color="default">問題を作る</WhiteTypography>
-										<WhiteSubTypography component="p" color="default">自分の知識を駆使して問題を作ってみましょう！</WhiteSubTypography>
-								</OptionCardContent>
+								<LinkContainer to='/'>
+									<OptionCardContent>
+										<WhiteTypography gutterBottom variant="h5" component="h2" color="default">問題を作る</WhiteTypography>
+											<WhiteSubTypography component="p" color="default">自分の知識を駆使して問題を作ってみましょう！</WhiteSubTypography>
+									</OptionCardContent>
+								</LinkContainer>
 							</OptionCardArea>
 						</CreateCard>
 
@@ -46,10 +50,12 @@ export default class Home extends Component {
 								<OptionCardMedia
 									image={process.env.PUBLIC_URL + "review.png"}
 								/>
-								<OptionCardContent>
-									<WhiteTypography gutterBottom variant="h5" component="h2" color="default">作る</WhiteTypography>
-										<WhiteSubTypography component="p" color="default">言語ごとに分類された問題を解いて自分のスキルを確認しましょう！</WhiteSubTypography>
-								</OptionCardContent>
+								<LinkContainer to='/'>
+									<OptionCardContent>
+										<WhiteTypography gutterBottom variant="h5" component="h2" color="default">復習する</WhiteTypography>
+											<WhiteSubTypography component="p" color="default">復習することで得た知識を定着させましょう</WhiteSubTypography>
+									</OptionCardContent>
+								</LinkContainer>
 							</OptionCardArea>
 						</ReviewCard>
 					</OptionContainer>
@@ -125,7 +131,9 @@ const OptionCardMedia = withStyles({
 	}
 })(CardMedia)
 
-
+const LinkContainer = styled(Link)`
+	text-decoration: none;
+`
 
 const HomeContainer = styled.div`
 	width: 100%;

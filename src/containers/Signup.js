@@ -2,7 +2,6 @@ import { connect } from 'react-redux'
 import Signup from '../components/Signup/Signup'
 import { createAccount } from '../actions/UserAuth'
 import { withRouter } from 'react-router-dom';
-import { compose } from 'redux'
 
 function mapStateToProps(state,props) {
 	const { location } = props.history

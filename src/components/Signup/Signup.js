@@ -2,13 +2,10 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { withStyles, MuiThemeProvider } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-import FormControl from '@material-ui/core/FormControl'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
-import { reduxForm, Field, FieldArray } from 'redux-form'
+import { reduxForm, Field } from 'redux-form'
 import {theme} from '../../ults/theme.js'
-import { connect } from 'react-redux'
-import { compose } from 'redux'
 
 
 const renderTextField = ({
@@ -34,9 +31,6 @@ const renderTextField = ({
 
 class Signup extends Component {
 
-	constructor(props) {
-		super(props)
-	}
 
   submit = (values) => {
     this.props.createAccount(values.email, values.password, values.user_name)
@@ -46,7 +40,7 @@ class Signup extends Component {
   }
 
 	render() {
-		const { classes, handleSubmit, send } = this.props
+		const { handleSubmit } = this.props
 		return(
 			<MuiThemeProvider theme={theme}>
 				<SignupContainer>

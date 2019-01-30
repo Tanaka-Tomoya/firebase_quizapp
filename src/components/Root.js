@@ -8,10 +8,9 @@ import Home from '../components/Home/Home'
 import MenuBar from '../containers/Appbar'
 import Signup from '../containers/Signup'
 import Signin from '../containers/Signin'
-import SignupSuccess from '../containers/SignupSuccess'
 import Welcome from './welcome/welcome'
 import Result from '../components/questionResult/questionResult'
-import { firebaseApp } from '../firebase/config'
+
 
 
 export default class Root extends Component {
@@ -25,7 +24,6 @@ export default class Root extends Component {
 
 	render() {
 		const { isLoading } = this.props.root
-		const { hasError } = this.props.root
 		const { isUser } = this.props.root
 		const { url } = this.props.match
 		console.log(this.props.match.url)

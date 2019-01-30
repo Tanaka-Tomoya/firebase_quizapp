@@ -5,7 +5,6 @@ import { startLoadFirebase,
 				 endLoadFirebase,
 				 getErrorLoadFirebase
  } from './App'
- import { fetchUserProfile } from './Appbar'
 import firebase from 'firebase/app';
 
 export const CREATE_ACCOUNT_SUCCESS = 'CREATE_ACCOUNT_SUCCESS'

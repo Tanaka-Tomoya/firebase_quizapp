@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import styled from 'styled-components'
 import { ConnectedRouter } from 'react-router-redux'
-import { createBrowserHistory } from 'history';
 import { Route } from 'react-router'
 import { history, configureStore } from '../store/index'
-import { firebaseApp } from '../firebase/config'
 import Root from '../containers/Root'
 import SignupSuccess from '../containers/SignupSuccess'
 import { Switch } from 'react-router-dom'
@@ -20,7 +17,6 @@ export default class App extends Component {
   }
 
   render() {
-    const { isLogin } = this.props
     return (
         <Provider store={store}>
           <ConnectedRouter history={history}>

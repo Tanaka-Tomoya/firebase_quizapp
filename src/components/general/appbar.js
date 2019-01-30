@@ -5,12 +5,10 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 //import MenuIcon from '@material-ui/icons/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
 import {theme} from '../../ults/theme'
 import Popover from '@material-ui/core/Popover'
 import firebase from 'firebase/app'
@@ -35,7 +33,7 @@ export default class MenuBar extends Component {
 		this.setState({ anchorEl: null });
 	};
 	render() {
-		const { auth, anchorEl } = this.state;
+		const { anchorEl } = this.state;
 		const open = Boolean(anchorEl);
 		const { userName } = this.props.appbar;
 		return (
