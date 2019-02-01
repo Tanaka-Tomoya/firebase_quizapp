@@ -19,15 +19,10 @@ export default class Root extends Component {
 		this.props.loginConfirm()
 	}
 
-	componentWillUpdate(nextProps) {
-	}
-
 	render() {
 		const { isLoading } = this.props.root
 		const { isUser } = this.props.root
 		const { url } = this.props.match
-		console.log(this.props.match.url)
-		console.log(this.props.match)
 		if(isLoading) {
 			return(
 				<Info>aaa</Info>

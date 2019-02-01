@@ -19,7 +19,6 @@ export const fetchListItems = (tag) => {
 
 		questionsRef.orderByChild('tag').startAt(tag).endAt(tag)
 		.once('value', function(snapshot) {
-			console.log(snapshot.val())
 				dispatch(endLoadFirebase())
 				dispatch(fetchListItemsSuccess(snapshot.val()))
 			})

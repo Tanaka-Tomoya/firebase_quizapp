@@ -15,12 +15,12 @@ export const fetchUserProfile = () => {
 	return(dispatch) => {
 		dispatch(startLoadFirebase())
 		const user = firebaseApp.auth().currentUser
-		console.log(user)
+		// console.log(user)
 		if (user != null) {
-			console.log(user.displayName)
+			// console.log(user.displayName)
 			dispatch(getUserProfile(user.displayName))
 		} else {
-			console.log('failure')
+			// console.log('failure')
 		}
 		dispatch(endLoadFirebase())
 	}

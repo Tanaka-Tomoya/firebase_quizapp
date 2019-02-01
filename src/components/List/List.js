@@ -11,20 +11,19 @@ import ListModal from './ListModal';
 
 export default class QuestionList extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      open: true,
-    }
+  state = {
+    open: true,
   }
 
   searchListItems = (tag) => {
-    this.setState({ open: false })
-    this.props.fetchListItems(tag)
+    this.setState({ open: false }, () => {
+      this.props.fetchListItems(tag)
+    });
   };
 	render() {
     const { items } = this.props.list
     console.log(items)
+    const itemLength = Object.keys(items).length
     const isEmpty = items.length === 0
     if (this.props.isLoading) {
       return (
@@ -54,7 +53,9 @@ export default class QuestionList extends Component {
                 </ListItems>
              </SearchResult>
             </ListContainer>
-            <ListModal open={this.state.open}  handleClick={tag => this.searchListItems(tag)}/>
+            {itemLength === 0 &&
+              <ListModal open={this.state.open}  handleClick={tag => this.searchListItems(tag)}/>
+            }
           </Container>
         </MuiThemeProvider>
       )

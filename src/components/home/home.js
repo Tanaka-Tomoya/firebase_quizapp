@@ -16,49 +16,53 @@ export default class Home extends Component {
 						<WelcomeTypography variant="h2">ようこそ</WelcomeTypography>
 						<SubTypography variant="display1">日々の努力が成果になります。頑張りましょう！！</SubTypography>
 					</TypographyContainer>
+
 					<OptionContainer>
 						<AnswerCard>
-							<OptionCardArea>
-								<OptionCardMedia
-									image={process.env.PUBLIC_URL + "answer.png"}
-								/>
-								<LinkContainer to='/list'>
-									<OptionCardContent>
-										<WhiteTypography gutterBottom variant="h5" component="h2" color="default">解く</WhiteTypography>
-											<WhiteSubTypography component="p" color="default">言語ごとに分類された問題を解いて自分のスキルを確認しましょう！</WhiteSubTypography>
-									</OptionCardContent>
-								</LinkContainer>
-							</OptionCardArea>
+							<LinkContainer to='/list'>
+								<OptionCardArea>
+									<OptionCardMedia
+										image={process.env.PUBLIC_URL + "answer.png"}
+									/>
+										<OptionCardContent>
+											<WhiteTypography gutterBottom variant="h5" component="h2" color="default">解く</WhiteTypography>
+												<WhiteSubTypography component="p" color="default">言語ごとに分類された問題を解いて自分のスキルを確認しましょう！</WhiteSubTypography>
+										</OptionCardContent>
+								</OptionCardArea>
+							</LinkContainer>
 						</AnswerCard>
 
 						<CreateCard>
+							<LinkContainer to='/'>
 							<OptionCardArea>
 								<OptionCardMedia
 									image={process.env.PUBLIC_URL + "make.png"}
 								/>
-								<LinkContainer to='/'>
+
 									<OptionCardContent>
 										<WhiteTypography gutterBottom variant="h5" component="h2" color="default">問題を作る</WhiteTypography>
 											<WhiteSubTypography component="p" color="default">自分の知識を駆使して問題を作ってみましょう！</WhiteSubTypography>
 									</OptionCardContent>
-								</LinkContainer>
+
 							</OptionCardArea>
+							</LinkContainer>
 						</CreateCard>
 
 						<ReviewCard>
-							<OptionCardArea>
-								<OptionCardMedia
-									image={process.env.PUBLIC_URL + "review.png"}
-								/>
-								<LinkContainer to='/'>
-									<OptionCardContent>
-										<WhiteTypography gutterBottom variant="h5" component="h2" color="default">復習する</WhiteTypography>
-											<WhiteSubTypography component="p" color="default">復習することで得た知識を定着させましょう</WhiteSubTypography>
-									</OptionCardContent>
-								</LinkContainer>
-							</OptionCardArea>
+							<LinkContainer to='/'>
+								<OptionCardArea>
+									<OptionCardMedia
+										image={process.env.PUBLIC_URL + "review.png"}
+									/>
+										<OptionCardContent>
+											<WhiteTypography gutterBottom variant="h5" component="h2" color="default">復習する</WhiteTypography>
+												<WhiteSubTypography component="p" color="default">復習することで得た知識を定着させましょう</WhiteSubTypography>
+										</OptionCardContent>
+								</OptionCardArea>
+							</LinkContainer>
 						</ReviewCard>
 					</OptionContainer>
+
 			</HomeContainer>
 		)
 	}
@@ -132,6 +136,9 @@ const OptionCardMedia = withStyles({
 })(CardMedia)
 
 const LinkContainer = styled(Link)`
+	width: 100%;
+	height: 100%;
+	&:hover { color: black }
 	text-decoration: none;
 `
 
