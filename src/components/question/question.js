@@ -6,33 +6,61 @@ import { MuiThemeProvider, withStyles } from '@material-ui/core/styles';
 import {theme} from '../../ults/theme.js'
 import AnswerField from './AnswerField'
 import AnswerResultModal from './AnswerResultModal'
+import QuestionResult from './questionResult'
 
 export default class Question extends Component {
 
 	state = {
 		open: false,
-    selectedValue: 'A',
-    activeStep: 1
+    userAnswer: 'A',
+    activeStep: 0,
+		questionNumber: 0,
+		correctAnswerCount: 0,
+		resultArray: []
+	}
+
+	createData = (number, isCorrect) => {
+	  return { number, isCorrect };
 	}
 
   handleChange = event => {
-  	this.setState({ selectedValue: event.target.value });
+  	this.setState({ userAnswer: event.target.value });
   };
 
 	handleOpen = () => {
 	  this.setState({ open: true });
 	};
-	handleClose = () => {
-		this.setState({ open: false});
+
+	correctAnswer = () => {
+		this.setState( prev => {
+			return {
+				open: false,
+				activeStep: prev.activeStep + 1,
+				questionNumber: prev.questionNumber + 1,
+				correctAnswer: prev.correctAnswer + 1,
+				resultArray: prev.resultArray.concat(this.createData('1', true))
+			}
+		});
+	}
+	incorrectAnswer = () => {
+		this.setState( prev => {
+			return {
+				open: false,
+				activeStep: prev.activeStep + 1,
+				questionNumber: prev.questionNumber + 1,
+			}
+		});
 	}
 
-	componentWillMount() {
+	componentDidMount() {
 		const { questionId } = this.props.match.params
-		const { questionNumber } = this.props.match.params
-		this.props.fetchQuestionContents(questionId, questionNumber)
+		this.props.fetchQuestionContents(questionId);
 	}
 	render() {
-		if (this.props.question.isLoading) {
+		const { isLoading } = this.props.question
+		const { questionLength } = this.props.question
+		const { questionNumber } = this.state
+		if (isLoading) {
 			return (
 				<info>ロード中</info>
 			)
@@ -40,34 +68,43 @@ export default class Question extends Component {
 			return (
 				<div>エラー</div>
 			)
+		} else if(questionNumber > questionLength) {
+			const { questionNumber } = this.state
+			const { correctAnswer } = this.state
+			return (
+				<QuestionResult/>
+			)
 		} else {
 			const { items } = this.props.question
-			const { length } = this.props.question
-			const { questionNumber } = this.props.match.params
 			const { questionId } = this.props.match.params
-			return (
+			const { activeStep } = this.state
+			const item = items[questionNumber]
+			console.log(this.state.resultArray)
+			console.log(Object.entries(this.state.resultArray))
+			return(
 				<Container theme={theme} >
 					<AnswerResultModal
 						open={this.state.open}
-						userAnswer={this.state.selectedValue}
-						questionAnswer={items.answer}
-						questionId={questionId}
-						questionNumber={questionNumber}
-						handleClose={() => this.handleClose()}
+						userAnswer={this.state.userAnswer}
+						questionAnswer={item.answer}
+						questionNumber={1}
+						questionLength={questionLength}
+						correctAnswer={() => this.correctAnswer()}
+						incorrectAnswer={() => this.incorrectAnswer()}
 						/>
 					<QuestionContainer>
 						<Stepper
 							variant="dots"
-							steps={length}
+							steps={questionLength}
 							position="static"
-							activeStep={this.state.activeStep}
+							activeStep={activeStep}
 						/>
-					<QuestionTypography variant="h2">Q.{questionNumber}  {items.question_title}</QuestionTypography>
+						<QuestionTypography variant="h2">Q. {item.question_title}</QuestionTypography>
 						<AnswerField
 							handleOpen={() => this.handleOpen()}
 							handleChange={event => this.handleChange(event)}
-							selectedValue={this.state.selectedValue}
-							option={items.option}
+							userAnswer={this.state.userAnswer}
+							option={item.option}
 							/>
 					</QuestionContainer>
 				</Container>

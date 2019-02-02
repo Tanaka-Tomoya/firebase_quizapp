@@ -114,7 +114,7 @@ Root
 <MenuBar/>
 <Switch>
 	<Route exact path={`${url}`} component={Home} />
-	<Route path={`${url}question/:questionId/:questionNumber`} component={Question} />
+	<Route path={`${url}question/:questionId`} component={Question} />
 	<Route path={`${url}result`} component={Result}  />
 	<Route exact path={`${url}list`} component={List} />
 </Switch>
@@ -130,3 +130,5 @@ Appの<Route path='/' component={Root}/>にexactをつけるとurlが/の時し�
 <Route path='/' component={Root}/>
 
 このように/のパスを最後に判定するように書かなければならない
+
+Objectは順番付されていない要素の集合

@@ -19,7 +19,8 @@ export const loginConfirm = () => {
 				dispatch(endLoadFirebase())
 			} else {
 				dispatch(confirmUserLogin(false))
-						dispatch(endLoadFirebase())
+				dispatch(endLoadFirebase())
+				console.log('this is root.js')
 			}
 			})
 	}

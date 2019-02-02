@@ -9,7 +9,6 @@ import MenuBar from '../containers/Appbar'
 import Signup from '../containers/Signup'
 import Signin from '../containers/Signin'
 import Welcome from './welcome/welcome'
-import Result from '../components/questionResult/questionResult'
 
 
 
@@ -33,8 +32,7 @@ export default class Root extends Component {
 					<MenuBar/>
 					<Switch>
 						<Route exact path={`${url}`} component={Home} />
-						<Route path={`${url}question/:questionId/:questionNumber`} component={Question} />
-						<Route path={`${url}result`} component={Result}  />
+						<Route path={`${url}question/:questionId`} component={Question} />
 						<Route exact path={`${url}list`} component={List} />
 					</Switch>
 				</AppDiv>

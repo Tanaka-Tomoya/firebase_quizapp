@@ -7,6 +7,8 @@ import { startLoadFirebase,
 const questionContentRef = database.ref("question_content")
 
 export const FETCH_QUESTION_CONTENTS_SUCCESS = 'FETCH_QUESTION_CONTENT_SUCCESS'
+export const END_FETCH_QUESTION = 'END_FETCH_QUESTION'
+export const START_FETCH_QUESTION = 'START_FETCH_QUESTION'
 
 export const fetchQuestionContentsSuccess = (items,length) => ({
 	type: FETCH_QUESTION_CONTENTS_SUCCESS,
@@ -14,19 +16,27 @@ export const fetchQuestionContentsSuccess = (items,length) => ({
 	length
 })
 
-export const fetchQuestionContents = (questionId, questionNumber) => {
+export const startFetchQuestion = () => ({
+	type: START_FETCH_QUESTION,
+	isLoading: true
+})
+
+export const endFetchQuestion = () => ({
+	type: END_FETCH_QUESTION,
+	isLoading: false
+})
+
+export const fetchQuestionContents = (questionId) => {
 	return (dispatch) =>{
-		dispatch(startLoadFirebase());
+		dispatch(startFetchQuestion());
 		questionContentRef
 		.orderByChild('question_id').startAt(questionId).endAt(questionId)
 		.once('value', function(snapshot) {
-				const questionChildren = snapshot.val()
-				const questionLength = questionChildren.length - 1
+				const questionChildren = Object.values(snapshot.val())
 				console.log(questionChildren)
-				console.log(questionLength)
-				const questionChild = questionChildren[questionNumber]
-				dispatch(fetchQuestionContentsSuccess(questionChild, questionLength))
-				dispatch(endLoadFirebase())
+				const questionLength = questionChildren.length
+				dispatch(fetchQuestionContentsSuccess(questionChildren, questionLength))
+				dispatch(endFetchQuestion())
 		})
 	}
 }

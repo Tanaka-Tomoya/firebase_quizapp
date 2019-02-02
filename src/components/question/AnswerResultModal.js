@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography'
 import CheckCircleOutline from '@material-ui/icons/CheckCircleOutline'
 import ArrowForward from '@material-ui/icons/ArrowForward'
 import FalseIcon from '@material-ui/icons/Clear'
+import Button from '@material-ui/core/Button'
 
 function getModalStyle() {
   const top = 50
@@ -27,9 +28,7 @@ export default class AnswerResultModal extends Component {
     const { userAnswer } = this.props
     const { questionAnswer } = this.props
     const { questionId } = this.props
-    const { questionNumber } = this.props
-    const num = Number(questionNumber) + 1
-    console.log(num)
+    console.log(`ユーザの答え:${userAnswer}でほんまの答えは${questionAnswer}やで`)
 		return (
 			<Modal
 				aria-labelledby="simple-modal-title"
@@ -43,6 +42,9 @@ export default class AnswerResultModal extends Component {
               <True/>
     					<Typography variant="h2">正解です！</Typography>
     					<Typography variant="display1" gutterBottom>この調子でがんばりましょう！</Typography>
+              <Button onClick={() => this.props.correctAnswer()}>
+                <Forward/>
+              </Button>
             </React.Fragment>
           }
           {userAnswer !== questionAnswer &&
@@ -50,11 +52,12 @@ export default class AnswerResultModal extends Component {
               <False/>
               <Typography variant="h2">不正解</Typography>
               <Typography variant="display1" gutterBottom>惜しかったねぇ...</Typography>
+              <Button onClick={() => this.props.incorrectAnswer()}>
+                <Forward/>
+              </Button>
             </React.Fragment>
           }
-					<Link to={`/question/${questionId}/${num}`} onClick={() => this.props.handleClose()}>
-						<Forward/>
-					</Link>
+
 				</ModalDiv>
 			</Modal>
 		)

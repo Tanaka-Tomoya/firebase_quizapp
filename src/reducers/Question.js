@@ -1,16 +1,17 @@
 import {
 	FETCH_QUESTION_CONTENTS_SUCCESS,
+	START_FETCH_QUESTION,
+	END_FETCH_QUESTION
 } from '../actions/Question'
 
 import {
 	START_LOAD_FIREBASE,
-	END_LOAD_FIREBASE,
 	GET_LOAD_FIREBASE_ERROR
 } from '../actions/App'
 
 const initialState = {
 	items: [],
-	length: 0,
+	questionLength: 0,
 	isLoading: true,
 	hasError: false,
 }
@@ -20,13 +21,13 @@ const Question = (state = initialState, action) => {
 		case FETCH_QUESTION_CONTENTS_SUCCESS:
 			return Object.assign({}, state, {
 				items: action.items,
-				length: action.length
+				questionLength: action.length
 			})
-		case START_LOAD_FIREBASE:
+		case START_FETCH_QUESTION:
 			return Object.assign({}, state, {
 				isLoading: action.isLoading
 			})
-		case END_LOAD_FIREBASE:
+		case END_FETCH_QUESTION:
 			return Object.assign({}, state, {
 				isLoading: action.isLoading
 			})

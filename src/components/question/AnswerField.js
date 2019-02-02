@@ -19,7 +19,7 @@ export default class AnswerField extends Component {
 					<FormControlLabel
 						label={<RadioButtonValue>{ this.props.option.a }</RadioButtonValue>}
 						control={<Radio
-										 checked={this.props.selectedValue === 'A'}
+										 checked={this.props.userAnswer === 'A'}
 										 onChange={this.props.handleChange}
 										 value="A"
 										 control={<RadioButton color="primary" />}
@@ -30,7 +30,7 @@ export default class AnswerField extends Component {
 					<FormControlLabel
 						label={<RadioButtonValue>{ this.props.option.b }</RadioButtonValue>}
 						control={<Radio
-										 checked={this.props.selectedValue === 'B'}
+										 checked={this.props.userAnswer === 'B'}
 										 onChange={this.props.handleChange}
 										 value="B"
 										 control={<RadioButton color="primary" />}
@@ -41,7 +41,7 @@ export default class AnswerField extends Component {
 					<FormControlLabel
 						label={<RadioButtonValue>{ this.props.option.c }</RadioButtonValue>}
 						control={<Radio
-										 checked={this.props.selectedValue === 'C'}
+										 checked={this.props.userAnswer === 'C'}
 										 onChange={this.props.handleChange}
 										 value="C"
 										 control={<RadioButton color="primary" />}
@@ -52,7 +52,7 @@ export default class AnswerField extends Component {
 						<FormControlLabel
 							label={<RadioButtonValue>{ this.props.option.d }</RadioButtonValue>}
 							control={<Radio
-											 checked={this.props.selectedValue === 'D'}
+											 checked={this.props.userAnswer === 'D'}
 											 onChange={this.props.handleChange}
 											 value="D"
 											 control={<RadioButton color="primary" />}

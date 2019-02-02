@@ -3,6 +3,7 @@ import Question  from '../components/question/question'
 import { fetchQuestionContents } from '../actions/Question'
 
 function mapStateToProps(state) {
+
 	return {
 		question: state.question
 	}
@@ -10,7 +11,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		fetchQuestionContents: (questionId, questionNumber) => dispatch(fetchQuestionContents(questionId, questionNumber))
+		fetchQuestionContents: (questionId) => dispatch(fetchQuestionContents(questionId))
 	}
 }
 

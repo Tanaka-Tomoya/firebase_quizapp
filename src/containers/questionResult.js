@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { questionResult } from '../components/questionResult/questionResult'
+import { questionResult } from '../components/question/questionResult'
 
 function mapStateToProps(state) {
 	return state;

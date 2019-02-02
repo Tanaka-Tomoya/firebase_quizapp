@@ -32,6 +32,7 @@ const rows = [
 
 export default class questionResult extends Component {
 	render() {
+    console.log(rows)
 		return (
 			<ResultContainer>
 				<ResultTitle>
