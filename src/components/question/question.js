@@ -14,13 +14,15 @@ export default class Question extends Component {
 		open: false,
     userAnswer: 'A',
     activeStep: 0,
-		questionNumber: 0,
-		correctAnswerCount: 0,
-		resultArray: []
+		questionNumber: 3,
+		result: [
+			{'id': 7 ,'isCorrect': 'true'},
+			{'id': 8 ,'isCorrect': 'true'}
+		]
 	}
 
-	createData = (number, isCorrect) => {
-	  return { number, isCorrect };
+	createData = (number) => {
+	  return { [`${number}`] : true };
 	}
 
   handleChange = event => {
@@ -37,8 +39,7 @@ export default class Question extends Component {
 				open: false,
 				activeStep: prev.activeStep + 1,
 				questionNumber: prev.questionNumber + 1,
-				correctAnswer: prev.correctAnswer + 1,
-				resultArray: prev.resultArray.concat(this.createData('1', true))
+				result: Object.assign({ [`${prev.questionNumber}`] : 'true' }, prev.result)
 			}
 		});
 	}
@@ -71,16 +72,23 @@ export default class Question extends Component {
 		} else if(questionNumber > questionLength) {
 			const { questionNumber } = this.state
 			const { correctAnswer } = this.state
+			const { result } = this.state
 			return (
-				<QuestionResult/>
+				<QuestionResult result={result} questionNumber={questionNumber} />
 			)
 		} else {
 			const { items } = this.props.question
 			const { questionId } = this.props.match.params
 			const { activeStep } = this.state
+			const { result } = this.state
 			const item = items[questionNumber]
-			console.log(this.state.resultArray)
-			console.log(Object.entries(this.state.resultArray))
+
+			const fuga = result.filter(x => x.isCorrect === 'true')
+			console.log(result.length)
+			console.log(fuga)
+			for (let key of Object.keys(fuga)) {
+				console.log(fuga[key].id + fuga[key].isCorrect);
+			}
 			return(
 				<Container theme={theme} >
 					<AnswerResultModal
