@@ -33,10 +33,13 @@ const rows = [
 export default class questionResult extends Component {
 	render() {
     console.log(this.props.result)
+    console.log(rows)
+    const { result } = this.props
+    const correctAnswerCount = result.filter(x => x.isCorrect === true).length
 		return (
 			<ResultContainer>
 				<ResultTitle>
-					<Typography variant="h2">５問中４問正解でした</Typography>
+					<Typography variant="h2">{result.length}問中{correctAnswerCount}問正解でした</Typography>
 					<SubTypography variant="display1">素晴らしい！！</SubTypography>
 				</ResultTitle>
 				<ResultDetail>
@@ -56,13 +59,13 @@ export default class questionResult extends Component {
 					         </TableRow>
 					      </TableHead>
 				        <TableBody>
-									{rows.map(row => {
+									{result.map(result => {
 										return (
-											<TableRow key={row.id}>
+											<TableRow key={result.id}>
 												<TableCell component="th" scope="row">
-													{row.number}
+													{result.id}
 												</TableCell>
-												{ row.isCorrect ?
+												{ result.isCorrect ?
 													<TableCell><Correct/></TableCell>
 												:
 													<TableCell><InCorrect/></TableCell>

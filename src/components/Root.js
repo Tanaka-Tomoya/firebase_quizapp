@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { MuiThemeProvider, withStyles } from '@material-ui/core/styles';
 import { Switch } from 'react-router-dom'
 import { Route } from 'react-router'
 import styled from 'styled-components'
@@ -9,6 +10,8 @@ import MenuBar from '../containers/Appbar'
 import Signup from '../containers/Signup'
 import Signin from '../containers/Signin'
 import Welcome from './welcome/welcome'
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { theme } from '../ults/theme'
 
 
 
@@ -24,7 +27,11 @@ export default class Root extends Component {
 		const { url } = this.props.match
 		if(isLoading) {
 			return(
-				<Info>aaa</Info>
+				<MuiThemeProvider theme={theme}>
+					<Container >
+						<Progress color="primary"/>
+					</Container>
+				</MuiThemeProvider>
 			)
 		}else if(isUser){
 			return(
@@ -58,3 +65,21 @@ const AppDiv = styled.div`
 const Info = styled.div`
 	margin-top: 200px;
 `
+
+const Container = styled.div`
+	height: 1000px;
+	width: 100%;
+	position: relative;
+	text-align: center
+`
+
+const Progress = withStyles({
+	root: {
+		top: '30%',
+		left: '50%',
+		position: 'absolute',
+		width: '100%',
+		height: '100%'
+
+	}
+})(CircularProgress)

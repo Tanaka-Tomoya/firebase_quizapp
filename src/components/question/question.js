@@ -16,8 +16,9 @@ export default class Question extends Component {
     activeStep: 0,
 		questionNumber: 3,
 		result: [
-			{'id': 7 ,'isCorrect': 'true'},
-			{'id': 8 ,'isCorrect': 'true'}
+			{'id': 7 ,'isCorrect': true},
+			{'id': 8 ,'isCorrect': true},
+			{'id': 9 ,'isCorrect': false},
 		]
 	}
 
@@ -70,11 +71,19 @@ export default class Question extends Component {
 				<div>エラー</div>
 			)
 		} else if(questionNumber > questionLength) {
-			const { questionNumber } = this.state
-			const { correctAnswer } = this.state
+			//const { questionNumber } = this.state
 			const { result } = this.state
+			const fuga = result.filter(x => x.isCorrect === true)
+			console.log(fuga.length)
+			console.log(result.length)
+			for (let key of Object.keys(fuga)) {
+				console.log(fuga[key].id + fuga[key].isCorrect);
+			}
 			return (
-				<QuestionResult result={result} questionNumber={questionNumber} />
+				<QuestionResult
+					result={result}
+					questionLength={questionLength}
+					/>
 			)
 		} else {
 			const { items } = this.props.question
@@ -83,12 +92,6 @@ export default class Question extends Component {
 			const { result } = this.state
 			const item = items[questionNumber]
 
-			const fuga = result.filter(x => x.isCorrect === 'true')
-			console.log(result.length)
-			console.log(fuga)
-			for (let key of Object.keys(fuga)) {
-				console.log(fuga[key].id + fuga[key].isCorrect);
-			}
 			return(
 				<Container theme={theme} >
 					<AnswerResultModal

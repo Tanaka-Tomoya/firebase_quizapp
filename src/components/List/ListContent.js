@@ -18,7 +18,7 @@ const ListContent = (props) => {
 			</ListItemAvatar>
 			<ListItemText
 				primary=
-				 <Link to={`question/${props.id}/0`}>
+				 <Link to={`question/${props.id}`}>
 					<Typography component={'span'} color="textPrimary">
 						{props.questions_title}
 					</Typography>
