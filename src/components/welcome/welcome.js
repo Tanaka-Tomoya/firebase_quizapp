@@ -35,7 +35,7 @@ const Welcome = () => {
 
 const WelcomeContainer = styled.div `
 	width: 100%;
-	height: 950px;
+	height: 100%;
 	background: url(./welcome.jpg) no-repeat center center;
 	background-size: cover;
 `
@@ -49,7 +49,7 @@ const ButtonContainer = styled.div `
 
 const TypographyField = styled.div `
 	width: 100%;
-	height: 950px;
+	height: 1200px;
 	background-color: rgba(102,180,206,0.9);
 	text-align: center;
 	position: relative;

@@ -24,13 +24,13 @@ export const createAccount = (email, password, user_name) => {
 			.then( (user) => {
 				user.user.updateProfile({
 					displayName: user_name
-				})
-				.then( () => {
+			})
+			.then( () => {
 					dispatch(push('/signupSuccess'));
 				})
 			})
 		})
-		.catch(function(error) {
+		.catch(error => {
 			dispatch(getErrorLoadFirebase())
 			console.log(error.message)
 			console.log(error.code)
@@ -41,10 +41,16 @@ export const createAccount = (email, password, user_name) => {
 
 export const login = (email, password) => {
 	return(dispatch) => {
-		dispatch(startLoadFirebase());
 		firebaseApp.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
 		.then(() => {
-			firebase.auth().signInWithEmailAndPassword(email, password)
+			console.log('success!!!!!')
+			firebaseApp.auth().signInWithEmailAndPassword(email, password)
+			.catch(error => {
+				alert('aaaaaa')
+				dispatch(getErrorLoadFirebase())
+				console.log(error.code)
+				console.log(error.message)
+			})
 			.then(() => {
 				dispatch(endLoadFirebase())
 			})
@@ -52,10 +58,6 @@ export const login = (email, password) => {
 				dispatch(push('/'));
 			})
 		})
-		.catch(function(error) {
-			dispatch(getErrorLoadFirebase())
-			console.log(error.message)
-			console.log(error.code)
-		});
+		dispatch(getErrorLoadFirebase())
 	}
 }

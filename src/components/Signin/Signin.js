@@ -36,8 +36,6 @@ class Signin extends Component {
   submit = (values) => {
 		this.props.login(values.email, values.password)
   }
-  componentWillMount() {
-  }
 
 	render() {
 		const { handleSubmit } = this.props

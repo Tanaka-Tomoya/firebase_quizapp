@@ -33,7 +33,6 @@ export const fetchQuestionContents = (questionId) => {
 		.orderByChild('question_id').startAt(questionId).endAt(questionId)
 		.once('value', function(snapshot) {
 				const questionChildren = Object.values(snapshot.val())
-				console.log(questionChildren)
 				const questionLength = questionChildren.length
 				dispatch(fetchQuestionContentsSuccess(questionChildren, questionLength))
 				dispatch(endFetchQuestion())

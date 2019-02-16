@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles,MuiThemeProvider } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
@@ -17,71 +17,64 @@ import Check from '@material-ui/icons/Check'
 import { Link } from 'react-router-dom'
 import { theme } from '../../ults/theme'
 
+// result.filter(x => x.isCorrect === true).length
 
-let id = 0;
-function createData(number, isCorrect) {
-  id += 1;
-  return { id, number, isCorrect };
-}
 
-const rows = [
-  createData('1', true),
-  createData('2', true),
-	createData('3', false),
-];
 
 export default class questionResult extends Component {
 	render() {
-    console.log(this.props.result)
-    console.log(rows)
     const { result } = this.props
-    const correctAnswerCount = result.filter(x => x.isCorrect === true).length
+    const { questionLength } = this.props
+    console.log(questionLength)
+    const correctAnswerCount = 1
+    const hoge = Object.keys(result).map((value, index) => {
+        return (
+          <TableRow key={index}>
+            <TableCell component="th" scope="row">
+              {index + 1}
+            </TableCell>
+            { value ?
+              <TableCell><Correct/></TableCell>
+            :
+              <TableCell><InCorrect/></TableCell>
+            }
+          </TableRow>
+        );
+    });
 		return (
+      <MuiThemeProvider theme={theme}>
 			<ResultContainer>
-				<ResultTitle>
-					<Typography variant="h2">{result.length}問中{correctAnswerCount}問正解でした</Typography>
-					<SubTypography variant="display1">素晴らしい！！</SubTypography>
-				</ResultTitle>
-				<ResultDetail>
-					<DetailTitle>
-						<SubTypography variant="display1">詳細</SubTypography>
-					</DetailTitle>
-					<Panel>
-        		<ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          		<Typography>結果</Typography>
-        		</ExpansionPanelSummary>
-        		<ExpansionPanelDetails>
-							<Table>
-        				<TableHead>
-          				<TableRow>
-				            <TableCell>No.</TableCell>
-				            <TableCell>正解/不正解</TableCell>
-					         </TableRow>
-					      </TableHead>
-				        <TableBody>
-									{result.map(result => {
-										return (
-											<TableRow key={result.id}>
-												<TableCell component="th" scope="row">
-													{result.id}
-												</TableCell>
-												{ result.isCorrect ?
-													<TableCell><Correct/></TableCell>
-												:
-													<TableCell><InCorrect/></TableCell>
-												}
-											</TableRow>
-										);
-									})}
-				        </TableBody>
-					    </Table>
-        		</ExpansionPanelDetails>
-      		</Panel>
+        <Result>
+  				<ResultTitle>
+  					<Typography variant="h2">{questionLength}問中{correctAnswerCount}問正解でした</Typography>
+  					<SubTypography variant="display1">素晴らしい！！</SubTypography>
+  				</ResultTitle>
+          <ResultDetail>
+  					<Panel>
+          		<ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+            		<Typography>結果</Typography>
+          		</ExpansionPanelSummary>
+          		<ExpansionPanelDetails>
+  							<Table>
+          				<TableHead>
+            				<TableRow>
+  				            <TableCell>No.</TableCell>
+  				            <TableCell>正解/不正解</TableCell>
+  					         </TableRow>
+  					      </TableHead>
+  				        <TableBody>
+                    {hoge}
+  				        </TableBody>
+  					    </Table>
+          		</ExpansionPanelDetails>
+        		</Panel>
+          </ResultDetail>
 					<QuitButtonArea>
-						<QuitButton variant="contained"><QuitLink to="/">戻る</QuitLink></QuitButton>
+						<QuitButton color="secondary" variant="contained"><QuitLink to="/">戻る</QuitLink></QuitButton>
 					</QuitButtonArea>
-				</ResultDetail>
+				</Result>
 			</ResultContainer>
+      </MuiThemeProvider>
 		)
 	}
 }
@@ -107,7 +100,8 @@ const SubTypography = withStyles({
 
 const Panel = withStyles({
 	root: {
-		width: '800px',
+		width: '550px',
+    display: 'block',
 	}
 })(ExpansionPanel)
 
@@ -116,7 +110,7 @@ const QuitButton = withStyles({
 		background: `${theme.palette.secondary.main}`,
     fontSize: '30px',
     color: 'white',
-    width: '150px',
+    width: '140px',
     height: '50px',
     marginLeft: 'auto',
 	}
@@ -128,32 +122,38 @@ const QuitLink = styled(Link)`
 `
 
 const ResultContainer = styled.div `
-	margin-top: 64px;
+	margin-top: 110px;
 	width: 100%;
 	height: 800px;
 `
 const ResultTitle = styled.div `
 	width: 100%;
 	height: 150px;
-	margin-top: 100px;
-	text-align: center;
+  text-align: center;
 `
 
-const ResultDetail = styled.div `
-	width: 1300px;
+const Result = styled.div `
+	width: 600px;
 	height: 500px;
-	margin-left: 300px;
+  margin: 0 auto;
 `
 const DetailTitle = styled.div `
 	width: 100%;
 	height: 100px;
 	padding-top: 100px;
+`
 
+const ResultDetail = styled.div `
+  width: 100%;
+  margin-top: 100px
 `
 
 const QuitButtonArea = styled.div `
-		width: 100%;
+		width: 95%;
 		height: 100px;
 		text-align: right;
 		margin-top: 100px;
 `
+// <DetailTitle>
+//   <SubTypography variant="display1">詳細</SubTypography>
+// </DetailTitle>

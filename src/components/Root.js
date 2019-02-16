@@ -28,7 +28,7 @@ export default class Root extends Component {
 		if(isLoading) {
 			return(
 				<MuiThemeProvider theme={theme}>
-					<Container >
+					<Container>
 						<Progress color="primary"/>
 					</Container>
 				</MuiThemeProvider>

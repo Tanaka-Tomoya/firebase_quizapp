@@ -14,24 +14,24 @@ export default class Question extends Component {
 		open: false,
     userAnswer: 'A',
     activeStep: 0,
-		questionNumber: 3,
-		result: [
-			{'id': 7 ,'isCorrect': true},
-			{'id': 8 ,'isCorrect': true},
-			{'id': 9 ,'isCorrect': false},
-		]
+		questionNumber: 0,
+		result: {},
+		isVisible: false
 	}
 
-	createData = (number) => {
-	  return { [`${number}`] : true };
-	}
 
   handleChange = event => {
-  	this.setState({ userAnswer: event.target.value });
+  	this.setState({
+			userAnswer: event.target.value,
+		});
   };
-
 	handleOpen = () => {
 	  this.setState({ open: true });
+		setTimeout(() => {
+			this.setState({ isVisible: !this.state.isVisible })
+		}, 100);
+		console.log(this.state.result)
+		console.log(typeof this.state.result)
 	};
 
 	correctAnswer = () => {
@@ -40,9 +40,13 @@ export default class Question extends Component {
 				open: false,
 				activeStep: prev.activeStep + 1,
 				questionNumber: prev.questionNumber + 1,
-				result: Object.assign({ [`${prev.questionNumber}`] : 'true' }, prev.result)
+				isVisible: !this.state.isVisible,
+				result: Object.assign({
+					[`${prev.questionNumber}`] : true
+				}, prev.result)
 			}
 		});
+
 	}
 	incorrectAnswer = () => {
 		this.setState( prev => {
@@ -50,6 +54,10 @@ export default class Question extends Component {
 				open: false,
 				activeStep: prev.activeStep + 1,
 				questionNumber: prev.questionNumber + 1,
+				isVisible: !this.state.isVisible,
+				result: Object.assign({
+					[`${prev.questionNumber}`]	: false
+				}, prev.result)
 			}
 		});
 	}
@@ -70,15 +78,9 @@ export default class Question extends Component {
 			return (
 				<div>エラー</div>
 			)
-		} else if(questionNumber > questionLength) {
+		} else if(questionNumber === questionLength) {
 			//const { questionNumber } = this.state
 			const { result } = this.state
-			const fuga = result.filter(x => x.isCorrect === true)
-			console.log(fuga.length)
-			console.log(result.length)
-			for (let key of Object.keys(fuga)) {
-				console.log(fuga[key].id + fuga[key].isCorrect);
-			}
 			return (
 				<QuestionResult
 					result={result}
@@ -102,6 +104,7 @@ export default class Question extends Component {
 						questionLength={questionLength}
 						correctAnswer={() => this.correctAnswer()}
 						incorrectAnswer={() => this.incorrectAnswer()}
+						isVisible={this.state.isVisible}
 						/>
 					<QuestionContainer>
 						<Stepper

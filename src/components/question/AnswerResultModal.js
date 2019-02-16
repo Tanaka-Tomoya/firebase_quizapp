@@ -8,6 +8,7 @@ import CheckCircleOutline from '@material-ui/icons/CheckCircleOutline'
 import ArrowForward from '@material-ui/icons/ArrowForward'
 import FalseIcon from '@material-ui/icons/Clear'
 import Button from '@material-ui/core/Button'
+import posed from 'react-pose';
 
 function getModalStyle() {
   const top = 50
@@ -20,41 +21,52 @@ function getModalStyle() {
   };
 }
 
+const props = {
+  visible: {
+    opacity: 1,
+    transitionDuration:'0.1s'
+   },
+  hidden: { opacity: 0 }
+}
+
+const Box = posed.div(props)
+
 
 export default class AnswerResultModal extends Component {
 	render() {
-    // console.log(this.props.userAnswer)
-    // console.log(this.props.questionAnswer)
     const { userAnswer } = this.props
     const { questionAnswer } = this.props
     const { questionId } = this.props
-    console.log(`ユーザの答え:${userAnswer}でほんまの答えは${questionAnswer}やで`)
+    const { open } = this.props
+    const { isVisible } = this.props
 		return (
 			<Modal
 				aria-labelledby="simple-modal-title"
 				aria-describedby="simple-modal-description"
-				open={this.props.open}
+				open={open}
 			>
 
 				<ModalDiv style={getModalStyle()}>
           {userAnswer === questionAnswer &&
             <React.Fragment>
-              <True/>
+              <Box pose={ isVisible ? 'visible' : 'hidden' }>
+                <True/>
+              </Box>
     					<Typography variant="h2">正解です！</Typography>
     					<Typography variant="display1" gutterBottom>この調子でがんばりましょう！</Typography>
-              <Button onClick={() => this.props.correctAnswer()}>
+              <ForwardButton onClick={() => this.props.correctAnswer()}>
                 <Forward/>
-              </Button>
+              </ForwardButton>
             </React.Fragment>
           }
           {userAnswer !== questionAnswer &&
             <React.Fragment>
               <False/>
               <Typography variant="h2">不正解</Typography>
-              <Typography variant="display1" gutterBottom>惜しかったねぇ...</Typography>
-              <Button onClick={() => this.props.incorrectAnswer()}>
+              <Typography variant="display1" gutterBottom>答えは{questionAnswer}です</Typography>
+              <ForwardButton onClick={() => this.props.incorrectAnswer()}>
                 <Forward/>
-              </Button>
+              </ForwardButton>
             </React.Fragment>
           }
 
@@ -73,6 +85,13 @@ const True = withStyles({
   }
 })(CheckCircleOutline)
 
+const ForwardButton = withStyles({
+  root: {
+    height: '100px',
+    marginTop: '100px'
+  }
+})(Button)
+
 const False = withStyles({
   root: {
     textAlign: 'center',
@@ -84,7 +103,6 @@ const False = withStyles({
 const Forward = withStyles({
   root: {
     color: '#00B8D4',
-    marginTop: '200px',
     fontSize: '100px',
     textAlign: 'center'
   }

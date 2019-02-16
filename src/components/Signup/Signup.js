@@ -34,9 +34,6 @@ class Signup extends Component {
 
   submit = (values) => {
     this.props.createAccount(values.email, values.password, values.user_name)
-
-  }
-  componentWillMount() {
   }
 
 	render() {
