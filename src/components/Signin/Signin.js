@@ -6,6 +6,7 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import { reduxForm, Field } from 'redux-form'
 import {theme} from '../../ults/theme.js'
+import { Link } from 'react-router-dom'
 
 
 
@@ -44,7 +45,7 @@ class Signin extends Component {
 				<SignupContainer>
 					<SignupContent onSubmit={handleSubmit(this.submit)}>
 						<SignupTitle>
-							<WhiteTypography variant="h3">Login</WhiteTypography>
+							<WhiteTypography variant="h3">ログイン</WhiteTypography>
 						</SignupTitle>
 						<FormContainer>
 							<FormContent>
@@ -53,6 +54,7 @@ class Signin extends Component {
  							 <SubmitButton type='submit' size='large' variant='outlined' color="secondary">登録する</SubmitButton>
 							</FormContent>
 						</FormContainer>
+            <Link to="/signup">アカウントを持っていない方はこちら</Link>
 					</SignupContent>
 				</SignupContainer>
 			</MuiThemeProvider>
@@ -63,7 +65,8 @@ class Signin extends Component {
 const WhiteTypography = withStyles({
 	root: {
 		color: 'white',
-		paddingLeft: '20px'
+		paddingLeft: '20px',
+		fontWeight: 800
 	}
 })(Typography)
 
@@ -99,7 +102,7 @@ const FormContent = styled.div `
 	height: 100%;
 	width: 100%;
 	position: absolute;
-	top: 65%;
+	top: 50%;
 	left: 50%;
 	transform: translate( -50%, -50%);
 
@@ -107,7 +110,7 @@ const FormContent = styled.div `
 const FormContainer = styled.div `
 	text-align: center;
 	position: relative;
-	height: 100%;
+	height: 85%;
 	width: 100%;
 `
 

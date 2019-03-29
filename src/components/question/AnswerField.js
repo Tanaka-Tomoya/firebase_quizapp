@@ -61,7 +61,7 @@ export default class AnswerField extends Component {
 										/>}
 							/>
 				</RadioContainer>
-				<SubmitButton color="secondary" variant="contained" onClick={() => this.props.handleOpen()}><span>答える！</span></SubmitButton>
+				<SubmitButton color="secondary" variant="contained" onClick={() => this.props.handleOpen()}><RadioButtonValue>答える！</RadioButtonValue></SubmitButton>
 			</FormContainer>
 		)
 	}
@@ -112,6 +112,14 @@ const SubmitButton = withStyles({
 
 })(Button)
 
+
+// const ContentTypography = withStyles({
+//   root: {
+//     fontWeight: 800
+//   }
+// })(Typography);
+
 const RadioButtonValue = styled.span `
-  font-size: 30px;
+	font-size: 30px;
+	font-weight: 800;
 `

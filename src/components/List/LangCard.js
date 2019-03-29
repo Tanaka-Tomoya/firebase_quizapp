@@ -1,52 +1,52 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
-import { withStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import Typography from '@material-ui/core/Typography';
-
+import React, { Component } from "react";
+import styled from "styled-components";
+import { withStyles } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import Typography from "@material-ui/core/Typography";
 
 export default class LangCard extends Component {
-	render() {
-		return(
-			<Lang key={this.props.index} >
-				<ActionArea onClick={() => this.props.handleClick(this.props.lang) }>
-					<Img src={process.env.PUBLIC_URL + this.props.langImg}/>
-				</ActionArea>
-				<LangTypography variant="display1">{this.props.lang}</LangTypography>
-			</Lang>
-		)
-	}
+  render() {
+    return (
+      <Lang key={this.props.index}>
+        <ActionArea onClick={() => this.props.handleClick(this.props.lang)}>
+          <Img src={process.env.PUBLIC_URL + this.props.langImg} />
+        </ActionArea>
+        <LangTypography variant="display1">{this.props.lang}</LangTypography>
+      </Lang>
+    );
+  }
 }
 
 const Lang = withStyles({
-	root: {
-		width: '180px',
-		height: '200px',
-		marginLeft: '50px',
-		marginTop: '30px',
-		position: 'relative',
-		zIndex: '1'
-	}
-})(Card)
+  root: {
+    width: "180px",
+    height: "200px",
+    position: "relative",
+    zIndex: "1",
+    marginLeft: "50px",
+    marginTop: "30px",
+    marginRight: "0px",
+  }
+})(Card);
 
 const ActionArea = withStyles({
   root: {
-    width: '100%',
-    height: '75%'
+    width: "100%",
+    height: "75%"
   }
-})(CardActionArea)
+})(CardActionArea);
 
 const LangTypography = withStyles({
   root: {
-    width: '100%',
-    height: '25%'
+    width: "100%",
+    height: "25%",
+    fontWeight: 800
   }
-})(Typography)
+})(Typography);
 
-
-const Img = styled.img `
+const Img = styled.img`
   width: 100%;
   height: 90%;
   object-fit: contain;
-`
+`;

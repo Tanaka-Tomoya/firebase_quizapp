@@ -1,0 +1,23 @@
+[debug] [2019-03-02T11:38:52.249Z] ----------------------------------------------------------------------
+[debug] [2019-03-02T11:38:52.251Z] Command:       /Users/tanakatomoya/.nodenv/versions/8.9.2/bin/node /Users/tanakatomoya/.nodenv/versions/8.9.2/bin/firebase deploy
+[debug] [2019-03-02T11:38:52.251Z] CLI Version:   6.0.1
+[debug] [2019-03-02T11:38:52.251Z] Platform:      darwin
+[debug] [2019-03-02T11:38:52.251Z] Node Version:  v8.9.2
+[debug] [2019-03-02T11:38:52.252Z] Time:          Sat Mar 02 2019 20:38:52 GMT+0900 (JST)
+[debug] [2019-03-02T11:38:52.252Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-03-02T11:38:52.266Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-03-02T11:38:52.266Z] > authorizing via signed-in user
+[debug] [2019-03-02T11:38:52.266Z] [iam] checking project quiz-app-10c5d for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasedatabase.instances.update","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]
+[debug] [2019-03-02T11:38:52.269Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/quiz-app-10c5d:testIamPermissions  
+
+[debug] [2019-03-02T11:38:53.146Z] <<< HTTP RESPONSE 200
+[debug] [2019-03-02T11:38:53.147Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/quiz-app-10c5d  
+ 
+[debug] [2019-03-02T11:38:54.045Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'quiz-app-10c5d'...
+[info] 
+[info] i  deploying database, storage, functions, hosting
+[info] Running command: npm --prefix ./functions/ run lint
+[info] Running command: npm --prefix ./functions/ run build

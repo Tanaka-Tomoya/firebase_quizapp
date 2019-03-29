@@ -26,14 +26,15 @@ export default class questionResult extends Component {
     const { result } = this.props
     const { questionLength } = this.props
     console.log(questionLength)
-    const correctAnswerCount = 1
+    const { correctAnswerCount } = this.props
     const hoge = Object.keys(result).map((value, index) => {
+				console.log(typeof result[index])
         return (
           <TableRow key={index}>
             <TableCell component="th" scope="row">
               {index + 1}
             </TableCell>
-            { value ?
+            { result[index] ?
               <TableCell><Correct/></TableCell>
             :
               <TableCell><InCorrect/></TableCell>
@@ -46,13 +47,13 @@ export default class questionResult extends Component {
 			<ResultContainer>
         <Result>
   				<ResultTitle>
-  					<Typography variant="h2">{questionLength}問中{correctAnswerCount}問正解でした</Typography>
+  					<ContentTypography variant="h2">{questionLength}問中{correctAnswerCount}問正解でした</ContentTypography>
   					<SubTypography variant="display1">素晴らしい！！</SubTypography>
   				</ResultTitle>
           <ResultDetail>
   					<Panel>
           		<ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            		<Typography>結果</Typography>
+            		<ContentTypography>結果</ContentTypography>
           		</ExpansionPanelSummary>
           		<ExpansionPanelDetails>
   							<Table>
@@ -85,6 +86,12 @@ const Correct = withStyles({
 	}
 })(Lens)
 
+const ContentTypography = withStyles({
+  root: {
+    fontWeight: 800
+  }
+})(Typography);
+
 const InCorrect = withStyles({
 	root: {
 		color: '#3F51B5'
@@ -94,7 +101,8 @@ const InCorrect = withStyles({
 
 const SubTypography = withStyles({
 	root: {
-		marginTop: '30px'
+		marginTop: '30px',
+		fontWeight: 800
 	}
 })(Typography)
 

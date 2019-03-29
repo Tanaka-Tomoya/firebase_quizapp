@@ -20,6 +20,13 @@ export default class QuestionList extends Component {
       this.props.fetchListItems(tag)
     });
   };
+  componentWillMount() {
+    console.log(this.state.open)
+    if(!this.state.open){
+      window.location.reload()
+    }
+    console.log('aaa')
+  }
 	render() {
     const { items } = this.props.list
     console.log(items)

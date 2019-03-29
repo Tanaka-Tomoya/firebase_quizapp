@@ -1,4 +1,3 @@
-
 import { firebaseApp } from '../firebase/config'
 import { push } from 'react-router-redux'
 import { startLoadFirebase,
@@ -21,14 +20,14 @@ export const createAccount = (email, password, user_name) => {
 		firebaseApp.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
 		.then(() => {
 			firebaseApp.auth().createUserWithEmailAndPassword(email,password)
-			.then( (user) => {
+			.then((user) => {
 				user.user.updateProfile({
 					displayName: user_name
-			})
-			.then( () => {
-					dispatch(push('/signupSuccess'));
 				})
 			})
+		})
+		.then(() => {
+				dispatch(push('/signupSuccess'));
 		})
 		.catch(error => {
 			dispatch(getErrorLoadFirebase())

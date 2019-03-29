@@ -52,7 +52,7 @@ export default class AnswerResultModal extends Component {
               <Box pose={ isVisible ? 'visible' : 'hidden' }>
                 <True/>
               </Box>
-    					<Typography variant="h2">正解です！</Typography>
+    					<ContentTypography variant="h2">正解です！</ContentTypography>
     					<Typography variant="display1" gutterBottom>この調子でがんばりましょう！</Typography>
               <ForwardButton onClick={() => this.props.correctAnswer()}>
                 <Forward/>
@@ -62,8 +62,8 @@ export default class AnswerResultModal extends Component {
           {userAnswer !== questionAnswer &&
             <React.Fragment>
               <False/>
-              <Typography variant="h2">不正解</Typography>
-              <Typography variant="display1" gutterBottom>答えは{questionAnswer}です</Typography>
+              <ContentTypography variant="h2">不正解</ContentTypography>
+              <ContentTypography variant="display1" gutterBottom>答えは{questionAnswer}です</ContentTypography>
               <ForwardButton onClick={() => this.props.incorrectAnswer()}>
                 <Forward/>
               </ForwardButton>
@@ -84,6 +84,12 @@ const True = withStyles({
     fontSize: '350px'
   }
 })(CheckCircleOutline)
+
+const ContentTypography = withStyles({
+  root: {
+    fontWeight: 800
+  }
+})(Typography);
 
 const ForwardButton = withStyles({
   root: {
